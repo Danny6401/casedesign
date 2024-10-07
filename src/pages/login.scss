@@ -1,0 +1,65 @@
+.login{
+    display: inline-block;
+    justify-content: center;
+    background: rgba(203, 203, 203, 0.831);
+    width: 434px;
+    height: 500px;
+    margin-top: 50px;
+    border-radius: 22px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    #logo{
+        margin-top: 20px;
+    }
+    
+    h4{
+        font-family: 'Segoe UI', bold;
+        font-size: 35px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    form{
+        display: inline-block;
+        align-items: center;
+        height: 270px;
+        width: 350px;
+        margin-bottom: 170px;
+    }
+    
+    .text_input{
+        margin-top: 1.2rem;
+        font-family: 'Montserrat regular';
+        font-size: 25px;
+        border: none;
+        width: 80%;
+        border-radius:10px;
+    }
+    
+    .btn{
+        margin-top: 28px;
+        margin-right: 10px;
+        margin-left: 10px;
+        width: 130px;
+        height: 60px;
+        border-radius: 30px;
+        background: #5a5a5a98;
+        border: none;
+        font-family: 'Montserrat';
+        font-size: 20px;
+        color: #FFFFFF;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        cursor: pointer;
+    }
+    .link{
+        margin-top: 50px;
+        text-align: center;
+        align-items: center;
+        color: #0E4579;
+        font-family: 'Montserrat light';
+        font-size: 18px;
+        cursor: pointer;
+        display: block;
+        text-decoration: black;
+    }
+}
+
