@@ -31,8 +31,9 @@
   color: #555;
   background: #7a7a7a8c;
   margin-bottom: 0px;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 100;
 }
