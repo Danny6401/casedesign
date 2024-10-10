@@ -1,4 +1,57 @@
-import React from 'react';
+import React, { useContext } from "react";
+import logo from "../assets/logo.png";
+import "./App.css";
+import { Link, Routes, Route } from "react-router-dom";
+import HomePage from "./homepage";
+import ELogin from "./eLogin";
+import PLogin from "./pLogin";
+import SignUp from "./signUp";
+import ItemList from "./merchantDise";
+
+export const dataContext = React.createContext();
+
+function App() {
+  const context = useContext(dataContext);
+
+  return (
+    <div className="app">
+      <header className="header">
+        <div className="box">
+          <Link to="/">
+            <img src={logo} className="titleLogo" alt="Logo" />
+          </Link>
+          <Link className="boxRight">
+            <Link to="/">
+              <div className="shoppingCart">購物車</div>
+            </Link>
+            <Link to="/eLogin">
+              <div className="hLogin">Login</div>
+            </Link>
+            <Link to="/merchantdise">
+              <div className="List">商品列表</div>
+              </Link>
+          </Link>
+        </div>
+      </header>
+      <section className="content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/eLogin" element={<ELogin />} />
+          <Route path="/pLogin" element={<PLogin />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/merchantdise" element={<ItemList />} />
+        </Routes>
+      </section>
+      <footer className="footer">
+        <div>caseDesign</div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+
+/*import React from 'react';
 import logo from '../assets/logo.png';
 import './App.css';
 import { Link, Route, withRouter } from 'react-router-dom';
@@ -33,4 +86,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default withRouter(App);*/
