@@ -7,6 +7,10 @@ import ELogin from "./eLogin";
 import PLogin from "./pLogin";
 import SignUp from "./signUp";
 import ItemList from "./merchantDise";
+import AdminPage from "./System";
+// import AdminItems from "./AdminItem";
+// import AdminOrders from "./AdminOrder";
+// import AdminUsers from "./AdminUser";
 
 export const dataContext = React.createContext();
 
@@ -29,7 +33,11 @@ function App() {
             </Link>
             <Link to="/merchantdise">
               <div className="List">商品列表</div>
-              </Link>
+            </Link>
+            <Link to="/system">
+              <div className="System">系統管理</div>
+            </Link>
+
           </Link>
         </div>
       </header>
@@ -40,6 +48,8 @@ function App() {
           <Route path="/pLogin" element={<PLogin />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/merchantdise" element={<ItemList />} />
+          <Route path="/System/*" element={<AdminPage />} />
+          {/* <Route path="/System/AdminItem" element={<AdminItems />} /> */}
         </Routes>
       </section>
       <footer className="footer">

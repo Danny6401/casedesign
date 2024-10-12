@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 // import styles from './App.module.scss';
 class MerchantDise extends React.Component {
   state = {

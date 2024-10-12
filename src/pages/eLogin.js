@@ -18,7 +18,6 @@ function ESignin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // 確認是否有抓到 username
-    console.log();
     alert(username);
     const loginData = {
       username: username,
