@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import "./App.css";
 import { Link, Routes, Route } from "react-router-dom";
@@ -15,47 +15,63 @@ import AdminPage from "./System";
 export const dataContext = React.createContext();
 
 function App() {
-  const context = useContext(dataContext);
-
+  const [userRole, setUserRole] = useState("normaluser");
+  const [userhasLogin, setuserhasLogin] = useState(false);
+  const contextValue = { userRole, setUserRole, userhasLogin, setuserhasLogin };
   return (
-    <div className="app">
-      <header className="header">
-        <div className="box">
-          <Link to="/">
-            <img src={logo} className="titleLogo" alt="Logo" />
-          </Link>
-          <Link className="boxRight">
+    <dataContext.Provider value={contextValue}>
+      <div className="app">
+        <header className="header">
+          <div className="box">
             <Link to="/">
-              <div className="shoppingCart">購物車</div>
+              <img src={logo} className="titleLogo" alt="Logo" />
             </Link>
-            <Link to="/eLogin">
-              <div className="hLogin">Login</div>
-            </Link>
-            <Link to="/merchantdise">
-              <div className="List">商品列表</div>
-            </Link>
-            <Link to="/system">
-              <div className="System">系統管理</div>
-            </Link>
-
-          </Link>
-        </div>
-      </header>
-      <section className="content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/eLogin" element={<ELogin />} />
-          <Route path="/pLogin" element={<PLogin />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/merchantdise" element={<ItemList />} />
-          <Route path="/System/*" element={<AdminPage />} />
-          {/* <Route path="/System/AdminItem" element={<AdminItems />} /> */}
-        </Routes>
-      </section>
-      <footer className="footer">
-        <div>caseDesign</div>
-      </footer>
-    </div>
+            <div className="boxRight">
+              <Link to="/">
+                <div className="shoppingCart">購物車</div>
+              </Link>
+              {userhasLogin ? (
+                <div
+                  onClick={() => {
+                    setuserhasLogin(false);
+                    alert("您已登出!");
+                  }}
+                  className="hLogout"
+                >
+                  Logout
+                </div>
+              ) : (
+                <Link to="/eLogin">
+                  <div className="hLogin">Login</div>
+                </Link>
+              )}
+              <Link to="/merchantdise">
+                <div className="List">商品列表</div>
+              </Link>
+              {userRole === "admin" && (
+                <Link to="/system">
+                  <div className="System">系統管理</div>
+                </Link>
+              )}
+            </div>
+          </div>
+        </header>
+        <section className="content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/eLogin" element={<ELogin />} />
+            <Route path="/pLogin" element={<PLogin />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/merchantdise" element={<ItemList />} />
+            <Route path="/System/*" element={<AdminPage />} />
+            {/* <Route path="/System/AdminItem" element={<AdminItems />} /> */}
+          </Routes>
+        </section>
+        <footer className="footer">
+          <div>caseDesign</div>
+        </footer>
+      </div>
+    </dataContext.Provider>
   );
 }
 

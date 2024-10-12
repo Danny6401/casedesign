@@ -7,13 +7,17 @@ import {
 } from "react-router-dom";
 import "./login.scss";
 import logo from "../assets/logo.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { dataContext } from "./App";
 
 function ESignin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setUserRole, setuserhasLogin } = useContext(dataContext);
+  // const context = useContext(dataContext);
+  // console.log("context: ", context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,13 +37,16 @@ function ESignin() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success && data.admin) {
-          navigate("/system");
+        if (data.success && data.admin === "admin") {
+          setUserRole(data.admin);
+          setuserhasLogin(true);
+          // navigate("/system");
         }
         console.log("data:", data);
         if (data.success) {
           console.log("Login successful");
           alert(`登入成功 ${data.username} ，歡迎回來!`);
+          setuserhasLogin(true);
           navigate("/");
         } else {
           switch (data.status) {
