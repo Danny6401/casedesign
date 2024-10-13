@@ -6,7 +6,7 @@ import logo from "../assets/logo.png";
 import React from "react";
 import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
-// import AdminOrders from "./AdminOrder";
+import AdminOrder from "./AdminOrder";
 // import AdminUsers from "./AdminUser";
 
 function AdminPage(){
@@ -38,6 +38,7 @@ function AdminPage(){
         <Routes>
           <Route path="/AdminItem" element={<AdminItems />} />
           <Route path="/AdminUser" element={<AdminUser />} />
+          <Route path="/AdminOrder" element={<AdminOrder />} />
         </Routes>
         </section>
       <footer className="footer">

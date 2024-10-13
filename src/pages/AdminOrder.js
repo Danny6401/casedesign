@@ -16,26 +16,51 @@ class AdminOrder extends React.Component {
   };
   async componentDidMount() {
     const url = "http://localhost:5000/system/AdminOrder";
-    console.log("componentDidMount");
+    // console.log("componentDidMount");
     const result = await axios(url);
     let dispString = "";
     if (result && result.data) {
-      result.data.map((item) => {
-        const { username, email, phonenumber, address, order, admin } = item;
-        let administrator = null;
-        admin === true ? (administrator = "是") : (administrator = "否");
-        //下面的頂單編號應該要有link to...查詢資料庫的功能(也就是查詢的頁面)，search?動態路由，請看node(3)
+      result.data.map((order) => {
+        const { _id, itemnames, status, amount} = order;
+        let statusstring = "";
+        switch(status){
+          case 0:
+            statusstring = "已完成";
+            break;
+          case 1:
+            statusstring = "處理中";
+            break;
+          case 2:
+            statusstring = "運送中";
+            break;
+          case 3:
+            statusstring = "已送達";
+            break;
+          case 4:
+            statusstring = "退貨取件中";
+            break;
+          default:
+            statusstring = "未知";
+            break;
+        }
+        console.log("itemnames: ", itemnames);
+        let items = "";
+        for(const item of itemnames){
+            // const {name, color} = item;
+            const {name} = item;
+            items += name;
+            // items += color;
+            // items += "\n" ;
+            items += "<br/>";
+        }
+        //下面訂單內的應該要有link to...查詢資料庫的功能(也就是查詢的頁面)，search?動態路由，請看node(3)
         dispString += `
-            <div class="card">
+            <div class="order">
              <div class="name">
-              <p>使用者名稱: ${username}</p>
-              <p>EMAIL: ${email}</p>
-              <p>行動電話: ${phonenumber}</p>
-              <p>送貨地址: ${address}</p>
-              <p>訂單號碼: ${order}</p> 
-              <p>管理者: ${administrator}</p>
-              <label for "deleteuser">刪除使用者</label>
-              <input type="checkbox" id="deleteuser" name="deleteuser"/>
+              <p>訂單編號: ${_id}</p>
+              <p>品項: ${items}</p>
+              <p>訂單狀況: ${statusstring}</p>
+              <p>訂單金額: ${amount}</p>
               <p>================================================================</p>
               <br/>
             </div>

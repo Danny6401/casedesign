@@ -11,7 +11,9 @@ class AdminItem extends React.Component {
     console.log("componentDidMount");
     const result = await axios(url);
     let dispString = "";
-    // console.log("result: ", result, " result.data: ", result.data);
+    /**
+     * 加入分類~
+     */
     if (result && result.data) {
       result.data.map(item => {
         const { name, color, description, filename, price, available } = item;
