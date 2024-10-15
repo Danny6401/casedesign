@@ -5,7 +5,7 @@ const signUp = ()=>{
     
     return(
         <div className="signup">
-            <img id="logo" height={60} src={logo}/>
+            <img id="logo" height={60} src={logo} alt="logo"/>
             <h4>Sign up</h4>
             <form>
                 <div>

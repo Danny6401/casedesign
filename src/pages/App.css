@@ -2,6 +2,8 @@
 .header{
   background: rgb(205, 196, 188);
   width: 100%;
+  position: fixed;
+  z-index: 100;
 }
 .titleLogo {
   height: 40px;

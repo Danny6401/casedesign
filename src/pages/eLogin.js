@@ -26,7 +26,7 @@ function ESignin(){
 
   return (
     <div className="login" >
-      <img id="logo" height={80} src={logo}/>
+      <img id="logo" height={80} src={logo} alt="logo"/>
       <h4>Sign In</h4>
       <form onSubmit={handleSubmit}>
         <input

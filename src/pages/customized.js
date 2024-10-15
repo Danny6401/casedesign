@@ -1,6 +1,5 @@
 import "./customized.scss";
 import { useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
 
 
 function Customized(){
@@ -42,7 +41,6 @@ function Customized(){
         })
     }
     const sendoder=(e)=>{
-        e.preventDefault();
         alert(`您的訂單
             鏡頭框顏色為${phoneStyle.lensRing}`)
     }
@@ -50,12 +48,12 @@ function Customized(){
     return (
         <div >
             <div className="showProduct" >
-                <img className="phone" src={require(`../assets/photo/${phoneStyle.color}.png`)}/>
-                <img className="case" src={require('../assets/photo/transparent.png')}/>
-                <img className="lensRing" src={require(`../assets/photo/${phoneStyle.lensRing}.png`)}/>
-                <img className="sideButton" src={require(`../assets/photo/${phoneStyle.sideButton}.png`)}/>
-                <img className="magsafe" src={require(`../assets/photo/${phoneStyle.magsafe}.png`)}/>
-                <img className="lanyard" src={require(`../assets/photo/${phoneStyle.lanyard}.png`)}/>
+                <img className="phone" alt="" src={require(`../assets/photo/${phoneStyle.color}.png`)}/>
+                <img className="case" alt="" src={require('../assets/photo/transparent.png')}/>
+                <img className="lensRing" alt="" src={require(`../assets/photo/${phoneStyle.lensRing}.png`)}/>
+                <img className="sideButton" alt="" src={require(`../assets/photo/${phoneStyle.sideButton}.png`)}/>
+                <img className="magsafe" alt="" src={require(`../assets/photo/${phoneStyle.magsafe}.png`)}/>
+                <img className="lanyard" alt="" src={require(`../assets/photo/${phoneStyle.lanyard}.png`)}/>
             </div>
             <div className="productSelect">
                 <div className="optionTitle">手機顏色:</div>

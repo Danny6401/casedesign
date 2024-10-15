@@ -14,7 +14,7 @@ function App() {
     <div className="app">
       <header className="header">
         <div className="box">
-          <Link to="/"><img src={logo} className="titleLogo"/></Link>
+          <Link to="/"><img src={logo} className="titleLogo" alt="logo"/></Link>
           <div className="boxRight">
             <Link to="/customized"><div className="customized">客製化手機殼 </div></Link>
             <Link to="/"><div className="shoppingCart">購物車 </div></Link>
