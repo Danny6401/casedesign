@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo.png';
 import './App.css';
 import { Link, Route, withRouter } from 'react-router-dom';
@@ -7,9 +7,28 @@ import eLogin from "./eLogin"
 import pLogin from "./pLogin"
 import signUp from "./signUp"
 import Customized from "./customized"
+import ShoppingCart from "./shoppingCart"
 
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  // 當應用加載時從 localStorage 中恢復購物車數據
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  // 每次購物車更新時保存到 localStorage
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
   return (
     <div className="app">
       <header className="header">
@@ -17,17 +36,18 @@ function App() {
           <Link to="/"><img src={logo} className="titleLogo" alt="logo"/></Link>
           <div className="boxRight">
             <Link to="/customized"><div className="customized">客製化手機殼 </div></Link>
-            <Link to="/"><div className="shoppingCart">購物車 </div></Link>
+            <Link to="/shoppingCart"><div className="shoppingCart">購物車 </div></Link>
             <Link to="/elogin"><div className="hlogin" >Login</div></Link>
           </div>
         </div>
       </header>
       <section className="content">
-        <Route path="/" exact component={HomePage} />
-        <Route path="/elogin" exact component={eLogin} />
-        <Route path="/pLogin" exact component={pLogin} />
-        <Route path="/signUp" exact component={signUp} />
-        <Route path="/customized" exact component={Customized}/>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/elogin" component={eLogin} />
+        <Route path="/pLogin" component={pLogin} />
+        <Route path="/signUp" component={signUp} />
+        <Route path="/shoppingCart" component={()=><ShoppingCart cartItems={cartItems}/>} />
+        <Route path="/customized" component={()=><Customized addToCart={addToCart}/>}/>
       </section>
       <footer className="footer">
         <div>caseDesign</div>
