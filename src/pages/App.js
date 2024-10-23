@@ -18,9 +18,9 @@ import ShoppingCart from "./shoppingCart";
 import ItemList from "./merchantDise";
 import Account from "./Account";
 import System from "./System";
-import AdminItems from "./AdminItem";
+/*import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
-import AdminOrder from "./AdminOrder";
+import AdminOrder from "./AdminOrder";/*/
 
 export const contextLoginName = React.createContext(null);
 
