@@ -141,10 +141,12 @@ function Customized({addToCart}){
 
 //加入購物車並刷新頁面
     const sendoder=()=>{
-        console.log(product)
-        alert("已加入購物車")
-        window.location.reload()
-        addToCart(product)
+        console.log(product);
+        alert("已加入購物車");
+        window.location.reload();
+        console.log("sendorder");
+        addToCart(product);
+        console.log("After addToCard");
     }
   
     return (
