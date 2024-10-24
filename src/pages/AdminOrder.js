@@ -16,14 +16,14 @@ class AdminOrder extends React.Component {
   };
   async componentDidMount() {
     const url = "http://localhost:5000/system/AdminOrder";
-    // console.log("componentDidMount");
+    console.log("componentDidMount");
     const result = await axios(url);
     let dispString = "";
     if (result && result.data) {
       result.data.map((order) => {
-        const { _id, itemnames, status, amount} = order;
+        /*const { _id, itemnames, status, amount } = order;
         let statusstring = "";
-        switch(status){
+        switch (status) {
           case 0:
             statusstring = "已完成";
             break;
@@ -45,22 +45,32 @@ class AdminOrder extends React.Component {
         }
         console.log("itemnames: ", itemnames);
         let items = "";
-        for(const item of itemnames){
-            // const {name, color} = item;
-            const {name} = item;
-            items += name;
-            // items += color;
-            // items += "\n" ;
-            items += "<br/>";
-        }
+        for (const item of itemnames) {
+          // const {name, color} = item;
+          const { name } = item;
+          items += name;
+          // items += color;
+          // items += "\n" ;
+          items += "<br/>";
+        }*/
         //下面訂單內的應該要有link to...查詢資料庫的功能(也就是查詢的頁面)，search?動態路由，請看node(3)
-        dispString += `
+        //Original One
+        /*        dispString += `
             <div class="order">
              <div class="name">
               <p>訂單編號: ${_id}</p>
               <p>品項: ${items}</p>
               <p>訂單狀況: ${statusstring}</p>
               <p>訂單金額: ${amount}</p>
+              <p>================================================================</p>
+              <br/>
+            </div>
+            </div>`;*/
+        dispString += `
+            <div class="order">
+             <div class="name">
+              <p>${order[0]}</p>
+              <p>${order[1]}</p>
               <p>================================================================</p>
               <br/>
             </div>

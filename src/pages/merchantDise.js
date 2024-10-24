@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import "./image.scss";
 // import { withRouter } from 'react-router-dom';
 // import styles from './App.module.scss';
 class MerchantDise extends React.Component {
@@ -26,16 +27,16 @@ class MerchantDise extends React.Component {
       if ( result && result.data) {
         result.data.map(el => {
         //   const {artistName, collectionName, collectionViewUrl, artworkUrl100} = el;
-        const {name, color, description, filename} = el;
+        const {name, price, description, filename} = el;
         // console.log("filename: ", filename);
           resString += `
             <div class="card">
              <div class="name">
               <p>商品名稱: ${name}</p>
               <p>商品描述: ${description}</p>
-              <p>商品顏色: ${color}</p>
+              <p>價格: NT$${price}</p>
               <div class="image">
-                <img src="/photo/${filename}"/>
+                <img src="/photo/case/${filename}"/>
               </div>
             </div>
             </div>`
@@ -47,9 +48,6 @@ class MerchantDise extends React.Component {
   render() {
       const { data } = this.state
       return (
-          // <div>
-          //     { data }
-          // </div>
           <div dangerouslySetInnerHTML={{ __html: data }}></div>          
       );
   }

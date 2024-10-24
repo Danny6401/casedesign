@@ -1,8 +1,10 @@
 import axios from "axios";
 import React from "react";
-
+/*fun'ction adminItem() {
+  console.log("adminItem");
+  return <h1>label</h1>;
+}*/
 class AdminItem extends React.Component {
-
   state = {
     data: [],
   };
@@ -15,10 +17,10 @@ class AdminItem extends React.Component {
      * 加入分類~
      */
     if (result && result.data) {
-      result.data.map(item => {
+      result.data.map((item) => {
         const { name, color, description, filename, price, available } = item;
         let sell = null;
-        available === true ? sell = "是" : sell = "否";
+        available === true ? (sell = "是") : (sell = "否");
         dispString += `
             <div class="card">
              <div class="name">
@@ -32,18 +34,16 @@ class AdminItem extends React.Component {
               <p>銷售中: ${sell}</p>
               <p></p>
             </div>
-            </div>`
-      })
+            </div>`;
+      });
       //ToDo::要加入新增物品的功能
       console.log(dispString);
       this.setState({ data: dispString });
     }
   }
   render() {
-    const { data } = this.state
-    return (
-      <div dangerouslySetInnerHTML={{ __html: data }}></div>
-    );
+    const { data } = this.state;
+    return <div dangerouslySetInnerHTML={{ __html: data }}></div>;
   }
 }
 

@@ -1,115 +1,162 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import logo from "../assets/logo.png";
+// import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import { Link, Routes, Route } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useNavigate /*, withRouter*/,
+} from "react-router-dom";
 import HomePage from "./homepage";
 import ELogin from "./eLogin";
 import PLogin from "./pLogin";
 import SignUp from "./signUp";
+import Customized from "./customized";
+import ShoppingCart from "./shoppingCart";
 import ItemList from "./merchantDise";
-import AdminPage from "./System";
-// import AdminItems from "./AdminItem";
-// import AdminOrders from "./AdminOrder";
-// import AdminUsers from "./AdminUser";
+import Account from "./Account";
+import System from "./System";
+/*import AdminItems from "./AdminItem";
+import AdminUser from "./AdminUser";
+import AdminOrder from "./AdminOrder";/*/
 
-export const dataContext = React.createContext();
+export const contextLoginName = React.createContext(null);
 
 function App() {
-  const [userRole, setUserRole] = useState("normaluser");
-  const [userhasLogin, setuserhasLogin] = useState(false);
-  const contextValue = { userRole, setUserRole, userhasLogin, setuserhasLogin };
+  const [cartItems, setCartItems] = useState([]);
+  const [LoginName, setLoginName] = useState(null);
+  const LoginValue = { LoginName, setLoginName };
+  const navigate = useNavigate();
+  // 當應用加載時從 localStorage 中恢復購物車數據
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  // 每次購物車更新時保存到 localStorage
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  //添加至購物車
+  const addToCart = (product) => {
+    console.log("addToCard");
+    const existProduct = cartItems.find((item) => item.id === product.id);
+    if (existProduct) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    }
+  };
+
   return (
-    <dataContext.Provider value={contextValue}>
+    <contextLoginName.Provider value={LoginValue}>
       <div className="app">
         <header className="header">
           <div className="box">
             <Link to="/">
-              <img src={logo} className="titleLogo" alt="Logo" />
+              <img src={logo} className="titleLogo" alt="logo" />
             </Link>
             <div className="boxRight">
-              <Link to="/">
-                <div className="shoppingCart">購物車</div>
+              <Link to="/customized">
+                <div className="customized">客製化手機殼 </div>
+                <br />
               </Link>
-              {userhasLogin ? (
+              <Link to="/shoppingCart">
+                <div className="shoppingCart">購物車 </div>
+                <br />
+              </Link>
+              {LoginName === null && (
+                <Link to="/eLogin">
+                  <div className="hlogin">Login</div>
+                  <br />
+                </Link>
+              )}
+              {LoginName === "網站管理員" && (
+                <>
+                  <Link to="/system">
+                    <div className="System">
+                      系統管理
+                      <br />
+                    </div>
+                  </Link>
+                </>
+              )}
+              {LoginName !== null && (
+                <Link to="/account">
+                  {" "}
+                  <div className="account">帳戶管理</div>
+                  <br />
+                </Link>
+              )}
+              {LoginName !== null && (
                 <div
                   onClick={() => {
-                    setuserhasLogin(false);
-                    alert("您已登出!");
+                    alert(LoginName + " 您已登出!");
+                    setLoginName(null);
+                    const url = "http://localhost:5000/logout";
+                    const logout = async () => {
+                      await axios(url);
+                    };
+                    logout();
+                    navigate("/");
                   }}
                   className="hLogout"
                 >
                   Logout
+                  <br />
                 </div>
-              ) : (
-                <Link to="/eLogin">
-                  <div className="hLogin">Login</div>
-                </Link>
               )}
+
               <Link to="/merchantdise">
                 <div className="List">商品列表</div>
               </Link>
-              {userRole === "admin" && (
-                <Link to="/system">
-                  <div className="System">系統管理</div>
-                </Link>
-              )}
             </div>
           </div>
         </header>
         <section className="content">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route exact path="/" element={<HomePage />} />
             <Route path="/eLogin" element={<ELogin />} />
             <Route path="/pLogin" element={<PLogin />} />
             <Route path="/signUp" element={<SignUp />} />
+            <Route
+              path="/shoppingCart"
+              element={
+                <ShoppingCart
+                  cartItems={cartItems}
+                  setCartItems={setCartItems}
+                />
+              }
+            />
+            <Route
+              path="/customized"
+              element={<Customized addToCart={addToCart} />}
+            />
             <Route path="/merchantdise" element={<ItemList />} />
-            <Route path="/System/*" element={<AdminPage />} />
-            {/* <Route path="/System/AdminItem" element={<AdminItems />} /> */}
+            <Route path="/account" element={<Account />} />
+            <Route path="/system/*" element={<System />} />
+            {/* 幹，上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}
           </Routes>
         </section>
         <footer className="footer">
           <div>caseDesign</div>
         </footer>
       </div>
-    </dataContext.Provider>
+    </contextLoginName.Provider>
   );
 }
+
 
 export default App;
-
-/*import React from 'react';
-import logo from '../assets/logo.png';
-import './App.css';
-import { Link, Route, withRouter } from 'react-router-dom';
-import HomePage from "./homepage"
-import eLogin from "./eLogin"
-import pLogin from "./pLogin"
-import signUp from "./signUp"
-
-
-function App() {
-  return (
-    <div className="app">
-      <header className="header">
-        <div className="box">
-          <Link to="/"><img src={logo} className="titleLogo"/></Link>
-          <div className="boxRight">
-            <Link to="/"><div className="shoppingCart">購物車 </div></Link>
-            <Link to="/elogin"><div className="hlogin" >Login</div></Link>
-          </div>
-        </div>
-      </header>
-      <section className="content">
-        <Route path="/" exact component={HomePage} />
-        <Route path="/elogin" exact component={eLogin} />
-        <Route path="/pLogin" exact component={pLogin} />
-        <Route path="/signUp" exact component={signUp} />
-      </section>
-      <footer className="footer">
-        <div>caseDesign</div>
-      </footer>
-    </div>
-  );
-}
-
-export default withRouter(App);*/
+//export default withRouter(App);
