@@ -70,15 +70,24 @@ function ShoppingCart({ cartItems, setCartItems }) {
         <ul>
           {cartItems.map((item) => (
             <li key={item.id} className="cartItem">
-              <div className="itemImage">
-                <img src={demo} alt="custdemo" />
-                <div className="itemDetail">
-                  <p>鏡頭框顏色:{item.detail.lensRing}</p>
-                  <p>側邊按鍵顏色:{item.detail.sideButton}</p>
-                  <p>加購磁吸環:{item.detail.magsafe}</p>
-                  <p>加購掛繩:{item.detail.lanyard}</p>
-                </div>
-              </div>
+                {typeof(item.id)=="number"?(
+                  <div className="itemImage">
+                    <img src={item.photo} alt="custdemo"/>
+                    <div className="itemDetail">
+                      <p>產品介紹:{item.detail}</p>
+                    </div>
+                  </div>
+                ):(
+                  <div className="itemImage">
+                    <img src={demo} alt="custdemo"/>
+                    <div className="itemDetail">
+                      <p>鏡頭框顏色:{item.detail.lensRing}</p>
+                      <p>側邊按鍵顏色:{item.detail.sideButton}</p>
+                      <p>加購磁吸環:{item.detail.magsafe}</p>
+                      <p>加購掛繩:{item.detail.lanyard}</p>
+                    </div>
+                  </div>
+                )}
               <div className="itemName">
                 <h3>{item.name}</h3>
                 <p>單價: NT${item.price}</p>
