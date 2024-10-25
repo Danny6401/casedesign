@@ -4,23 +4,23 @@ import React from 'react';
 
 function MerchandiseList({addToCart,productList}) {
 
-  const sendoder=(el)=>{
-    alert("已加入購物車");
-    addToCart(el);
+  const sendoder=(item)=>{
+    alert(`商品:${item.name}  已加入購物車`);
+    addToCart(item);
   }
 
   return (
     <div>
-      {productList.map((el) => (
-          <div className="card" key={el._id}>
+      {productList.map((item) => (
+          <div className="card" key={item._id}>
             <div className="name">
-              <p>商品名稱: {el.name}</p>
-              <p>商品描述: {el.description}</p>
-              <p>價格: NT${el.price}</p>
+              <p>商品名稱: {item.name}</p>
+              <p>商品描述: {item.description}</p>
+              <p>價格: NT${item.price}</p>
               <div className="image">
-                <img src={`/photo/case/${el.filename}`} alt={el.name} />
+                <img src={`/photo/case/${item.filename}`} alt={item.name} />
               </div>
-              <button onClick={() => sendoder(el)}>加入購物車</button>
+              <button onClick={() => sendoder(item)}>加入購物車</button>
             </div>
           </div>
       ))}
