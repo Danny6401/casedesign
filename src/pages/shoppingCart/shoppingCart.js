@@ -1,5 +1,5 @@
 import React from "react";
-import demo from "../assets/photo/cartdemo.jpg";
+import demo from "../../assets/photo/cartdemo.jpg";
 import "./shoppingcart.scss";
 import { useNavigate } from "react-router-dom";
 

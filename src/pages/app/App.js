@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 // import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import {
@@ -9,15 +9,15 @@ import {
   Routes,
   useNavigate /*, withRouter*/,
 } from "react-router-dom";
-import HomePage from "./homepage";
-import ELogin from "./eLogin";
-import PLogin from "./pLogin";
-import SignUp from "./signUp";
-import Customized from "./customized";
-import ShoppingCart from "./shoppingCart";
-import ItemList from "./merchantDise";
-import Account from "./Account";
-import System from "./System";
+import HomePage from "../homepage/homepage";
+import ELogin from "../login/eLogin";
+import PLogin from "../login/pLogin";
+import SignUp from "../signup/signUp";
+import Customized from "../customized/customized";
+import ShoppingCart from "../shoppingCart/shoppingCart";
+import ItemList from "../merchandise/merchantDise";
+import Account from "../Account";
+import System from "../System";
 /*import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
 import AdminOrder from "./AdminOrder";/*/

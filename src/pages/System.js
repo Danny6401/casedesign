@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
-import "./App.css";
+import "./app/App.css";
 import logo from "../assets/logo.png";
 import React from "react";
 import AdminItems from "./AdminItem";

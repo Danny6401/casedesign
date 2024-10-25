@@ -5,11 +5,11 @@
   Link,
   withRouter,
 } from "react-router-dom";*/
-import "./login.scss";
+import "./login/login.scss";
 import logo from "../assets/logo.png";
 import { useState, useContext, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import { contextLoginName } from "./App";
+import { contextLoginName } from "./app/App";
 import { Link } from "react-router-dom";
 // import { loginStatus } from './App';
 
