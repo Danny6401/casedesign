@@ -16,7 +16,6 @@ function PSignin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // 確認是否有抓到 username
-    alert(username);
 
     const loginData = {
       phone: username,

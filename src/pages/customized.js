@@ -133,7 +133,7 @@ function Customized({addToCart}){
         return `${details.lensRing}-${details.sideButton}-${details.magsafe}-${details.lanyard}`;
       };
     const product={
-        id:generateProductId(caseDetail),
+        _id:generateProductId(caseDetail),
         name:"客製化手機殼",
         price:caseDetail.price,
         detail:caseDetail

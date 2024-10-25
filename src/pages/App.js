@@ -29,6 +29,24 @@ function App() {
   const [LoginName, setLoginName] = useState(null);
   const LoginValue = { LoginName, setLoginName };
   const navigate = useNavigate();
+  const [productList, setProductList] = useState([]); // 儲存商品資料
+
+  useEffect(() => {
+    const fetchMerchandise = async () => {
+      const url = "http://localhost:5000/merchantdise";
+      try {
+        const result = await axios.get(url);
+        if (result && result.data) {
+          setProductList(result.data); // 將資料直接存入 state
+        }
+      } catch (error) {
+        console.error("Error fetching merchandise data:", error);
+      }
+    };
+
+    fetchMerchandise();
+  }, []); // 空依賴陣列確保只在第一次渲染後執行
+  
   // 當應用加載時從 localStorage 中恢復購物車數據
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -45,11 +63,11 @@ function App() {
   //添加至購物車
   const addToCart = (product) => {
     console.log("addToCard");
-    const existProduct = cartItems.find((item) => item.id === product.id);
+    const existProduct = cartItems.find((item) => item._id === product._id);
     if (existProduct) {
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id
+          item._id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
@@ -143,7 +161,7 @@ function App() {
               path="/customized"
               element={<Customized addToCart={addToCart} />}
             />
-            <Route path="/merchantdise" element={<ItemList />} />
+            <Route path="/merchantdise" element={<ItemList addToCart={addToCart} productList={productList}/>} />
             <Route path="/account" element={<Account />} />
             <Route path="/system/*" element={<System />} />
             {/* 幹，上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}

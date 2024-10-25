@@ -1,65 +1,31 @@
-import axios from 'axios';
-import React from 'react';
 import "./image.scss";
-// import { withRouter } from 'react-router-dom';
-// import styles from './App.module.scss';
-class MerchantDise extends React.Component {
-  state = {
-      data: []
+import React from 'react';
+
+
+function MerchandiseList({addToCart,productList}) {
+
+  const sendoder=(el)=>{
+    // alert("已加入購物車");
+    addToCart(el);
   }
 
-  async componentDidMount () {
-
-      /*const corsUrl = 'https://cors-anywhere.herokuapp.com/'
-      const sourceUrl = 'https://itunes.apple.com/search?term=twice&limit=20&media=music'
-      const url = corsUrl + sourceUrl*/
-      const url = "http://localhost:5000/merchantdise";
-
-      // fetch
-      // const data = await fetch('https://randomuser.me/api/', {}).then(res =>  res.json())
-      // if (data) {
-      //     this.setState({data: data.results[0].name.first})
-      // }
-      
-      // //axios
-      const result = await axios(url)
-      var resString = ""
-      if ( result && result.data) {
-        result.data.map(el => {
-        //   const {artistName, collectionName, collectionViewUrl, artworkUrl100} = el;
-        const {name, price, description, filename} = el;
-        // console.log("filename: ", filename);
-          resString += `
-            <div class="card">
-             <div class="name">
-              <p>商品名稱: ${name}</p>
-              <p>商品描述: ${description}</p>
-              <p>價格: NT$${price}</p>
-              <div class="image">
-                <img src="/photo/case/${filename}"/>
-              </div>
-            </div>
-            </div>`
-        })
-        this.setState({data: resString})
-      }
-  }
-
-  render() {
-      const { data } = this.state
-      return (
-          <div dangerouslySetInnerHTML={{ __html: data }}></div>          
-      );
-  }
-}
-
-const App = (props) => {
   return (
-    <div className="AP">
-      <MerchantDise/>
+    <div>
+      {productList.map((el) => (
+          <div className="card" key={el._id}>
+            <div className="name">
+              <p>商品名稱: {el.name}</p>
+              <p>商品描述: {el.description}</p>
+              <p>價格: NT${el.price}</p>
+              <div className="image">
+                <img src={`/photo/case/${el.filename}`} alt={el.name} />
+              </div>
+              <button onClick={() => sendoder(el)}>加入購物車</button>
+            </div>
+          </div>
+      ))}
     </div>
   );
 }
 
-// export default withRouter(App);
-export default App;
+export default MerchandiseList;
