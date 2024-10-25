@@ -5,7 +5,7 @@ import React from 'react';
 function MerchandiseList({addToCart,productList}) {
 
   const sendoder=(el)=>{
-    // alert("已加入購物車");
+    alert("已加入購物車");
     addToCart(el);
   }
 
