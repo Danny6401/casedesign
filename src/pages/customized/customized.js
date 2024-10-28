@@ -133,7 +133,7 @@ function Customized({addToCart}){
         return `${details.lensRing}-${details.sideButton}-${details.magsafe}-${details.lanyard}`;
       };
     const product={
-        id:generateProductId(caseDetail),
+        _id:generateProductId(caseDetail),
         name:"客製化手機殼",
         price:caseDetail.price,
         detail:caseDetail
@@ -152,12 +152,12 @@ function Customized({addToCart}){
     return (
         <div >
             <div className="showProduct" >
-                <img className="phone" alt="" src={require(`../assets/photo/${caseStyle.color}.png`)}/>
-                <img className="case" alt="" src={require('../assets/photo/transparent.png')}/>
-                <img className="lensRing" alt="" src={require(`../assets/photo/${caseStyle.lensRing}.png`)}/>
-                <img className="sideButton" alt="" src={require(`../assets/photo/${caseStyle.sideButton}.png`)}/>
-                <img className="magsafe" alt="" src={require(`../assets/photo/${caseStyle.magsafe}.png`)}/>
-                <img className="lanyard" alt="" src={require(`../assets/photo/${caseStyle.lanyard}.png`)}/>
+                <img className="phone" alt="" src={require(`../../assets/photo/${caseStyle.color}.png`)}/>
+                <img className="case" alt="" src={require('../../assets/photo/transparent.png')}/>
+                <img className="lensRing" alt="" src={require(`../../assets/photo/${caseStyle.lensRing}.png`)}/>
+                <img className="sideButton" alt="" src={require(`../../assets/photo/${caseStyle.sideButton}.png`)}/>
+                <img className="magsafe" alt="" src={require(`../../assets/photo/${caseStyle.magsafe}.png`)}/>
+                <img className="lanyard" alt="" src={require(`../../assets/photo/${caseStyle.lanyard}.png`)}/>
             </div>
             <div className="productSelect">
                 <div className="optionTitle">手機顏色:</div>

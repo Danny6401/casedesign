@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 // import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import {
@@ -9,15 +9,16 @@ import {
   Routes,
   useNavigate /*, withRouter*/,
 } from "react-router-dom";
-import HomePage from "./homepage";
-import ELogin from "./eLogin";
-import PLogin from "./pLogin";
-import SignUp from "./signUp";
-import Customized from "./customized";
-import ShoppingCart from "./shoppingCart";
-import ItemList from "./merchantDise";
-import Account from "./Account";
-import System from "./System";
+import HomePage from "../homepage/homepage";
+import ELogin from "../login/eLogin";
+import PLogin from "../login/pLogin";
+import SignUp from "../signup/signUp";
+import Customized from "../customized/customized";
+import ShoppingCart from "../shoppingCart/shoppingCart";
+import ItemList from "../merchandise/merchantDise";
+import Account from "../Account";
+import System from "../System";
+import Defines from "../../utils/Defines";
 /*import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
 import AdminOrder from "./AdminOrder";/*/
@@ -29,6 +30,25 @@ function App() {
   const [LoginName, setLoginName] = useState(null);
   const LoginValue = { LoginName, setLoginName };
   const navigate = useNavigate();
+  const [productList, setProductList] = useState([]); // 儲存商品資料
+
+  useEffect(() => {
+    const fetchMerchandise = async () => {
+      //const url = "http://localhost:5000/merchantdise";
+      const url = Defines.URL + "merchantdise";
+      try {
+        const result = await axios.get(url);
+        if (result && result.data) {
+          setProductList(result.data); // 將資料直接存入 state
+        }
+      } catch (error) {
+        console.error("Error fetching merchandise data:", error);
+      }
+    };
+
+    fetchMerchandise();
+  }, []); // 空依賴陣列確保只在第一次渲染後執行
+  
   // 當應用加載時從 localStorage 中恢復購物車數據
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -45,11 +65,11 @@ function App() {
   //添加至購物車
   const addToCart = (product) => {
     console.log("addToCard");
-    const existProduct = cartItems.find((item) => item.id === product.id);
+    const existProduct = cartItems.find((item) => item._id === product._id);
     if (existProduct) {
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id
+          item._id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
@@ -104,7 +124,8 @@ function App() {
                   onClick={() => {
                     alert(LoginName + " 您已登出!");
                     setLoginName(null);
-                    const url = "http://localhost:5000/logout";
+                    //const url = "http://localhost:5000/logout";
+                    const url = Defines.URL + "logout";
                     const logout = async () => {
                       await axios(url);
                     };
@@ -143,7 +164,7 @@ function App() {
               path="/customized"
               element={<Customized addToCart={addToCart} />}
             />
-            <Route path="/merchantdise" element={<ItemList />} />
+            <Route path="/merchantdise" element={<ItemList addToCart={addToCart} productList={productList}/>} />
             <Route path="/account" element={<Account />} />
             <Route path="/system/*" element={<System />} />
             {/* 幹，上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}
@@ -156,6 +177,7 @@ function App() {
     </contextLoginName.Provider>
   );
 }
+
 
 export default App;
 //export default withRouter(App);

@@ -8,3 +8,6 @@ cd..
 @REM rmdir /S /Q "D:\NodeProject\jsproject-lccnet\build\*"
 for /D %%p in ("D:\NodeProject\jsproject-lccnet\build\*") do rmdir /S /Q "%%p"
 robocopy "D:\NodeProject\casedesign\build" "D:\NodeProject\jsproject-lccnet\build" /E
+
+for /D %%p in ("D:\NodeProject\heroku\build\*") do rmdir /S /Q "%%p"
+robocopy "D:\NodeProject\casedesign\build" "D:\NodeProject\heroku\build" /E

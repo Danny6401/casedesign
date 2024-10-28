@@ -1,29 +1,34 @@
 import {
-  /*BrowserRouter as Router, Switch, Route,*/ Link /*, withRouter*/,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  Link,
+  // withRouter,
 } from "react-router-dom";
 import "./login.scss";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { contextLoginName } from "./App";
+import { contextLoginName } from "../app/App";
+import Defines from "../../utils/Defines";
 
-function PSignin() {
+function ESignin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setLoginName } = useContext(contextLoginName);
-  // 阻止送出表單
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // 確認是否有抓到 username
     alert(username);
-
     const loginData = {
-      phone: username,
+      username: username,
       password: password,
     };
 
-    fetch("http://localhost:5000/login", {
+    //fetch("http://localhost:5000/login", {
+    fetch(Defines.URL + "login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,17 +37,16 @@ function PSignin() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("data:", data);
         if (data.success && data.admin) {
           setLoginName(data.username);
           navigate("/system");
         }
+        console.log("data:", data);
         if (data.success) {
           console.log("Login successful");
           alert(`登入成功 ${data.username} ，歡迎回來!`);
           setLoginName(data.username);
           navigate("/");
-          // history.push("/");
         } else {
           setLoginName(null);
           switch (data.status) {
@@ -81,12 +85,12 @@ function PSignin() {
       <h4>Sign In</h4>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
+          type="email"
           id="username"
+          name="email"
           value={username}
           onChange={handleUsername}
-          name="phoneNumber"
-          placeholder="Phone Number"
+          placeholder="E-mail"
           className="text_input"
           required
         />
@@ -105,12 +109,12 @@ function PSignin() {
         <Link to="/signUp">
           <input type="button" value="SIGN UP" className="btn" />
         </Link>
-        <Link to="/eLogin">
-          <div className="link">Using E-mail to Login</div>
+        <Link to="/pLogin">
+          <div className="link">Using Phone Number to Login</div>
         </Link>
       </form>
     </div>
   );
 }
 
-export default PSignin;
+export default ESignin;

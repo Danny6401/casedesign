@@ -1,7 +1,8 @@
 import "./signup.scss";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Defines from "../../utils/Defines";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -26,7 +27,8 @@ function SignUp() {
       birthday: birthday
     }
     e.preventDefault();
-    fetch("http://localhost:5000/signup", {
+    // fetch("http://localhost:5000/signup", {
+      fetch(Defines.URL + "signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
