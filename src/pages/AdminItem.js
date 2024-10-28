@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import Defines from "../utils/Defines";
 /*fun'ction adminItem() {
   console.log("adminItem");
   return <h1>label</h1>;
@@ -9,26 +10,28 @@ class AdminItem extends React.Component {
     data: [],
   };
   async componentDidMount() {
-    const url = "http://localhost:5000/system/AdminItem";
+    // const url = "http://localhost:5000/system/AdminItem";
+    const url = Defines.URL + "system/AdminItem";
+
     console.log("componentDidMount");
-    const result = await axios(url);
+    const result = await axios.get(url);
     let dispString = "";
     /**
      * 加入分類~
      */
+    console.log("Item Result: ", result, " result.data: ", result.data);
     if (result && result.data) {
       result.data.map((item) => {
         const { name, color, description, filename, price, available } = item;
         let sell = null;
-        available === true ? (sell = "是") : (sell = "否");
+        available === true ? (sell = "否") : (sell = "是");
         dispString += `
             <div class="card">
              <div class="name">
               <p>商品名稱: ${name}</p>
               <p>商品描述: ${description}</p>
-              <p>商品顏色: ${color}</p>
               <div class="image">
-                <img src="/photo/${filename}"/>
+                <img src="/photo/case/${filename}"/>
               </div>
               <p>定價: ${price}</p>
               <p>銷售中: ${sell}</p>

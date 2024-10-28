@@ -11,6 +11,7 @@ import { useState, useContext, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { contextLoginName } from "./app/App";
 import { Link } from "react-router-dom";
+import Defines from "../utils/Defines";
 // import { loginStatus } from './App';
 
 function Account() {
@@ -19,8 +20,10 @@ function Account() {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setselectedOrder] = useState(null);
   const { LoginName } = useContext(contextLoginName);
-  let LinkAddress = "http://localhost:5000/account/";
-  const url = "http://localhost:5000/account/" + LoginName;
+  /*let LinkAddress = "http://localhost:5000/account/";
+  const url = "http://localhost:5000/account/" + LoginName;*/
+  let LinkAddress = Defines.URL + "account/";
+  const url = LinkAddress + LoginName;
 
   useEffect(() => {
     fetch(url, {

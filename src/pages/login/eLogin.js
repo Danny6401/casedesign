@@ -10,6 +10,7 @@ import logo from "../../assets/logo.png";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { contextLoginName } from "../app/App";
+import Defines from "../../utils/Defines";
 
 function ESignin() {
   const [username, setUsername] = useState("");
@@ -20,12 +21,14 @@ function ESignin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // 確認是否有抓到 username
+    alert(username);
     const loginData = {
       username: username,
       password: password,
     };
 
-    fetch("http://localhost:5000/login", {
+    //fetch("http://localhost:5000/login", {
+    fetch(Defines.URL + "login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

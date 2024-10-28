@@ -2,6 +2,7 @@ import React from "react";
 import demo from "../../assets/photo/cartdemo.jpg";
 import "./shoppingcart.scss";
 import { useNavigate } from "react-router-dom";
+import Defines from "../../utils/Defines";
 
 function ShoppingCart({ cartItems, setCartItems }) {
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ function ShoppingCart({ cartItems, setCartItems }) {
     // cartItems.map((item)=>{console.log("item:", item);})
     for (let item of cartItems) console.log("item: ", item);
     try {
-      let result = await fetch("http://localhost:5000/uploadorder", {
+      // let result = await fetch("http://localhost:5000/uploadorder", {
+      let result = await fetch(Defines.URL + "uploadorder", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cartItems),

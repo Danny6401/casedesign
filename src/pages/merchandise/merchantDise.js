@@ -1,15 +1,16 @@
 import "./merchantDise.scss";
 import React, { useState } from 'react';
 
+import Defines from "../../utils/Defines";
 
-function MerchandiseList({addToCart,productList}) {
+function MerchandiseList({ addToCart, productList }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
   const sendoder=(item)=>{
     alert(`商品:${item.name}  已加入購物車`);
     addToCart(item);
-  }
+  };
 
   const totalPages = Math.ceil(productList.length / itemsPerPage);
 

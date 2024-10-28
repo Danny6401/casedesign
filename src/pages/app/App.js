@@ -18,6 +18,7 @@ import ShoppingCart from "../shoppingCart/shoppingCart";
 import ItemList from "../merchandise/merchantDise";
 import Account from "../Account";
 import System from "../System";
+import Defines from "../../utils/Defines";
 /*import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
 import AdminOrder from "./AdminOrder";/*/
@@ -33,7 +34,8 @@ function App() {
 
   useEffect(() => {
     const fetchMerchandise = async () => {
-      const url = "http://localhost:5000/merchantdise";
+      //const url = "http://localhost:5000/merchantdise";
+      const url = Defines.URL + "merchantdise";
       try {
         const result = await axios.get(url);
         if (result && result.data) {
@@ -122,7 +124,8 @@ function App() {
                   onClick={() => {
                     alert(LoginName + " 您已登出!");
                     setLoginName(null);
-                    const url = "http://localhost:5000/logout";
+                    //const url = "http://localhost:5000/logout";
+                    const url = Defines.URL + "logout";
                     const logout = async () => {
                       await axios(url);
                     };
