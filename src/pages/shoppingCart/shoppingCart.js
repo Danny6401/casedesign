@@ -71,7 +71,6 @@ function ShoppingCart({ cartItems, setCartItems }) {
       ) : (
         <ul>
           {cartItems.map((item) => (
-<<<<<<< HEAD:src/pages/shoppingCart/shoppingCart.js
             <li key={item._id} className="cartItem">
                 {typeof(item._id)=="number"?(
                   <div className="itemImage">
@@ -79,14 +78,6 @@ function ShoppingCart({ cartItems, setCartItems }) {
                     <div className="itemDetail">
                       <p>產品介紹:{item.description
                       }</p>
-=======
-            <li key={item.id} className="cartItem">
-                {typeof(item.id)=="number"?(
-                  <div className="itemImage">
-                    <img src={item.photo} alt="custdemo"/>
-                    <div className="itemDetail">
-                      <p>產品介紹:{item.detail}</p>
->>>>>>> ea4fc77edf086398fe1011c5146c98e9a9a2a4b5:src/pages/shoppingCart.js
                     </div>
                   </div>
                 ):(
