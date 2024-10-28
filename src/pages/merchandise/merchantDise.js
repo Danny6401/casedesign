@@ -30,10 +30,12 @@ function MerchandiseList({addToCart,productList}) {
           <div className="card" key={item._id}>
             <div className="name">
               <div className="image">
-                <p className="title">商品名稱: {item.name}</p>
-                <p>商品描述: {item.description}</p>
-                <p>價格: NT${item.price}</p>
-                <img src={`/photo/case/${item.filename}`} alt={item.name} />
+                <img src={`/photo/case/${item.filename}`} alt={item.name} />  
+                <div>
+                  <p className="title">商品名稱: {item.name}</p>
+                  <p>商品描述: {item.description}</p>
+                  <p>價格: NT${item.price}</p>
+                </div>
               </div>
               <button onClick={() => sendoder(item)}>加入購物車</button>
             </div>
