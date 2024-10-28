@@ -25,7 +25,7 @@ function MerchandiseList({addToCart,productList}) {
   };
 
   return (
-    <div>
+    <div className="list">
       {currentProducts.map((item) => (
           <div className="card" key={item._id}>
             <div className="name">
