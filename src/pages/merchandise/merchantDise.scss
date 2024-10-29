@@ -57,8 +57,22 @@
     }
   }
   .pageChange{
+    font-size: 25px;
     height: 100px;
     width: 100%;
+    button{
+      background-color: #e2c8c8;
+      border: 0;
+      padding: 2px 25px;
+      font-size: 30px;
+      margin: 5px;
+      border-radius: 45%;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #a07970;
+      color: black;
+    }
   }
 }
 .image-modal {

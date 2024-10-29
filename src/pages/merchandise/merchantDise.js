@@ -55,11 +55,11 @@ function MerchandiseList({ addToCart, productList }) {
       ))}
       <div className="pageChange">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          上一頁
+        &#8249;
         </button>
         <span>頁數 {currentPage} / {totalPages}</span>
         <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          下一頁
+        &#8250;
         </button>
       </div>
       {/* 放大圖片顯示區域 */}

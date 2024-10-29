@@ -1,7 +1,7 @@
 .app{
-  display: grid;
+  display: flex;
   min-height: 100vh;
-  grid-template-rows: 1fr auto;
+  flex-direction: column;
 }
 .header{
   background: rgb(205, 196, 188);
@@ -32,11 +32,10 @@
   }
 
 .footer{
-  grid-row-start: 3;
-  grid-row-end: 4;
   text-align: center;
   padding: 20px 0px;
   color: #555;
   background: #7a7a7a8c;
+  margin-top: auto;
   margin-bottom: 0px;
 }
