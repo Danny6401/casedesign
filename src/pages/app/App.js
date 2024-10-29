@@ -150,7 +150,7 @@ function App() {
                 {/* 商品列表選項 */}
               </Nav.Item>
               <Nav.Item>
-              <Nav.Link href="/List"><img src={basketsvg} alt="List"/></Nav.Link>
+              <Nav.Link href="/merchantdise"><img src={basketsvg} alt="merchantdise"/></Nav.Link>
               </Nav.Item>
             </Nav>
           </div>
