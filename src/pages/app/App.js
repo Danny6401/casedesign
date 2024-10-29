@@ -5,7 +5,8 @@ import pensvg from "../../assets/svg/pen.svg"
 import cartsvg from "../../assets/svg/cart.svg"
 import circlesvg from "../../assets/svg/person-circle.svg"
 import basketsvg from "../../assets/svg/basket.svg"
-
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
 // import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import {
@@ -90,70 +91,85 @@ function App() {
       <div className="app">
 
         {/* HEADER */}
-        <header className="header">
-          <div>
-            <Link to="/">
-              <img src={logo} className="titleLogo" alt="logo" />
-            </Link>
-            <Nav className="justify-content-end" activeKey="/">
-              <Nav.Item>
-                <Nav.Link href="/customized"><img src={pensvg} alt="pen"/></Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/shoppingCart"><img src={cartsvg} alt="cart"/></Nav.Link>
-              </Nav.Item>
+        <header className="header" >
+          <Navbar className="bg-body-tertiary" activeKey="/">
+            <Container >
+              {/* LOGO */}
+              <Navbar.Brand>
+                <Nav.Link href="/"><img src={logo} className="titleLogo" alt="logo" /></Nav.Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+              {/* LOGO */}
 
-              {/* 登入選項 */}
-              <Nav.Item>
-                <Nav.Link href="/eLogin"><img src={circlesvg} alt="person"/></Nav.Link>
-                {LoginName === null && (
-                  <Nav.Link to="/eLogin">
-                    <div className="hlogin"></div>
-                  </Nav.Link>
-                )}
-                {LoginName === "網站管理員" && (
-                  <>
-                    <Link to="/system">
-                      <div className="System">
-                        系統管理
-                        <br />
-                      </div>
+
+              <Navbar.Collapse className="justify-content-end" data-bs-theme="#A1887F">
+
+                <Nav.Item xs={1}>
+                  <Nav.Link href="/customized"><img src={pensvg} className="svg" alt="pen" />  </Nav.Link>
+                </Nav.Item>
+
+
+                <Nav.Item xs={1}>
+                  <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" />  </Nav.Link>
+                </Nav.Item>
+
+                {/* 登入選項 */}
+
+                <Nav.Item xs={1}>
+                  <Nav.Link href="/eLogin"><img src={circlesvg} className="svg" alt="person" />  </Nav.Link>
+                  {LoginName === null && (
+                    <Nav.Link to="/eLogin">
+                      <div className="hlogin"></div>
+                    </Nav.Link>
+                  )}
+                  {LoginName === "網站管理員" && (
+                    <>
+                      <Link to="/system">
+                        <div className="System">
+                          系統管理
+                          <br />
+                        </div>
+                      </Link>
+                    </>
+                  )}
+                  {LoginName !== null && (
+                    <Link to="/account">
+                      {" "}
+                      <div className="account">帳戶管理</div>
+                      <br />
                     </Link>
-                  </>
-                )}
-                {LoginName !== null && (
-                  <Link to="/account">
-                    {" "}
-                    <div className="account">帳戶管理</div>
-                    <br />
-                  </Link>
-                )}
-                {LoginName !== null && (
-                  <div
-                    onClick={() => {
-                      alert(LoginName + " 您已登出!");
-                      setLoginName(null);
-                      //const url = "http://localhost:5000/logout";
-                      const url = Defines.URL + "logout";
-                      const logout = async () => {
-                        await axios(url);
-                      };
-                      logout();
-                      navigate("/");
-                    }}
-                    className="hLogout"
-                  >
-                    Logout
-                    <br />
-                  </div>
-                )}
+                  )}
+                  {LoginName !== null && (
+                    <div
+                      onClick={() => {
+                        alert(LoginName + " 您已登出!");
+                        setLoginName(null);
+                        //const url = "http://localhost:5000/logout";
+                        const url = Defines.URL + "logout";
+                        const logout = async () => {
+                          await axios(url);
+                        };
+                        logout();
+                        navigate("/");
+                      }}
+                      className="hLogout"
+                    >
+                      Logout
+                      <br />
+                    </div>
+                  )}
+
+                </Nav.Item>
+
                 {/* 商品列表選項 */}
-              </Nav.Item>
-              <Nav.Item>
-              <Nav.Link href="/merchantdise"><img src={basketsvg} alt="merchantdise"/></Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </div>
+
+                <Nav.Item>
+                  <Nav.Link href="/List"><img className="svg" src={basketsvg} alt="basket" /></Nav.Link>
+                </Nav.Item>
+
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
         </header>
 
         <section className="content">
@@ -184,10 +200,25 @@ function App() {
 
 
         <footer className="footer">
-          <div>caseDesign</div>
+          <Navbar>
+            <Container>
+              <Navbar.Brand href="/">
+                <Nav.Link href="/"><img src={logo} className="titleLogo" alt="logo" /></Nav.Link>
+              </Navbar.Brand>
+              <Nav.Item>
+                  Designed : caseDesign
+                </Nav.Item>
+              <Navbar.Toggle/>
+              <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>
+                  Signed in as: <a href="#login">Danny, Ajax, Chester</a>
+                </Navbar.Text>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
         </footer>
       </div>
-    </contextLoginName.Provider>
+    </contextLoginName.Provider >
   );
 }
 

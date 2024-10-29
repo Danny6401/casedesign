@@ -4,9 +4,14 @@
   flex-direction: column;
 }
 .header{
-  background: rgb(205, 196, 188);
+  background: #cf6a12;
   width: 100%;
 }
+
+.svg{
+  fill: #e9964e;
+}
+
 .titleLogo {
   height: 60px;
   align-items:start;
