@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import logo from "../../assets/logo.png";
 // import { BrowserRouter as Router } from "react-router-dom";
-import "./App.css";
+import "../app/App.css";
 import {
   Link,
   Route,

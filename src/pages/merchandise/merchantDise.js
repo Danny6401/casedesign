@@ -5,6 +5,7 @@ import Defines from "../../utils/Defines";
 
 function MerchandiseList({ addToCart, productList }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(null);
   const itemsPerPage = 20;
 
   const sendoder=(item)=>{
@@ -25,13 +26,23 @@ function MerchandiseList({ addToCart, productList }) {
     }
   };
 
+  // 點擊圖片放大
+  const bigImg = (item) => {
+    setSelectedImage(item);
+  };
+
+  // 關閉圖片放大
+  const closeImage = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className="list">
       {currentProducts.map((item) => (
           <div className="card" key={item._id}>
             <div className="name">
               <div className="image">
-                <img src={`/photo/case/${item.filename}`} alt={item.name} />  
+                <img src={`/photo/case/${item.filename}`} alt={item.name} onClick={()=>bigImg(item)}/>  
                 <div>
                   <p className="title">商品名稱: {item.name}</p>
                   <p>商品描述: {item.description}</p>
@@ -51,6 +62,15 @@ function MerchandiseList({ addToCart, productList }) {
           下一頁
         </button>
       </div>
+      {/* 放大圖片顯示區域 */}
+      {selectedImage && (
+        <div className="image-modal" onClick={closeImage}>
+          <div className="modal-content">
+            <img src={`/photo/case/${selectedImage.filename}`} alt={selectedImage.name} />
+            <span className="close">&times;</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
