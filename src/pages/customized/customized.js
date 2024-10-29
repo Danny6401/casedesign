@@ -150,7 +150,7 @@ function Customized({addToCart}){
     }
   
     return (
-        <div >
+        <div className="custom">
             <div className="showProduct" >
                 <img className="phone" alt="" src={require(`../../assets/photo/${caseStyle.color}.png`)}/>
                 <img className="case" alt="" src={require('../../assets/photo/transparent.png')}/>
