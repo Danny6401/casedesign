@@ -1,10 +1,14 @@
-
+.app{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 .header{
   background: rgb(205, 196, 188);
   width: 100%;
 }
 .titleLogo {
-  height: 80px;
+  height: 60px;
   align-items:start;
 }
 .content{
@@ -30,9 +34,6 @@
   padding: 20px 0px;
   color: #555;
   background: #7a7a7a8c;
+  margin-top: auto;
   margin-bottom: 0px;
-  position: relative;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
