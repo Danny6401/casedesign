@@ -14,7 +14,15 @@ import Ad04 from "../../assets/ads/ad04.png";
 import Ad05 from "../../assets/ads/ad05.png";
 import logo from "../../assets/logo.png";
 
-function HomePage() {
+function HomePage({addToCart, productList}) {
+    const randomProduct=[...productList].sort(() => 0.5 - Math.random());
+    const randomThreeProduct=randomProduct.slice(0,3);
+
+    const sendoder=(item)=>{
+        alert(`商品:${item.name}  已加入購物車`);
+        addToCart(item);
+      };
+
     return (
         // 輪轉圖片廣告
         <Container>
@@ -77,39 +85,19 @@ function HomePage() {
             {/* 輪轉圖片廣告 */}
 
             <Row>
-                <Col>    <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={logo} />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card></Col>
-                <Col>    <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={logo} />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card></Col>
-                <Col>    <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={logo} />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card></Col>
+                {randomThreeProduct.map((item)=>(
+                    <Col key={item._id}>    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={`/photo/case/${item.filename}`} />
+                            <Card.Body>
+                                <Card.Title>{item.name}</Card.Title>
+                                <Card.Text>{item.description}</Card.Text>
+                                <Card.Text>價格: NT${item.price}</Card.Text>
+                                <Button variant="primary" onClick={() => sendoder(item)}>加入購物車</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>     
+                ))}
+                
             </Row>
             {/* 插版 */}
             <Row xs={1} md={2} className="g-4">

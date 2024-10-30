@@ -174,7 +174,7 @@ function App() {
 
         <section className="content">
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/" element={<HomePage addToCart={addToCart} productList={productList}/>} />
             <Route path="/eLogin" element={<ELogin />} />
             <Route path="/pLogin" element={<PLogin />} />
             <Route path="/signUp" element={<SignUp />} />
