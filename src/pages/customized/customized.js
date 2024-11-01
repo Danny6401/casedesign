@@ -1,7 +1,7 @@
 import "./customized.scss";
 import { useState } from 'react';
 import Select from "react-select";
-import { Form, Card, Button, Container, Row, Col, ListGroup, Image, CardBody } from 'react-bootstrap';
+import { Form, Card, Button, Container, Row, Col, ListGroup, Image } from 'react-bootstrap';
 
 function Customized({ addToCart }) {
     const phoneColor = [
@@ -52,36 +52,18 @@ function Customized({ addToCart }) {
     });//用於傳遞商品資訊
 
     const changePhoneColor = (e) => {
-        setCaseStyle({
-            ...caseStyle,
-            color:  e.target.value
-        })
+        setCaseStyle({ ...caseStyle, color: e.target.value })
     }
     const changeLensColor = (e) => {
-        setCaseStyle({
-            ...caseStyle,
-            lensRing:  e.target.value
-        })
-        setCaseDetail({
-            ...caseDetail,
-            lensRing: e.target.label
-        })
+        setCaseStyle({ ...caseStyle, lensRing: e.target.value })
+        setCaseDetail({ ...caseDetail, lensRing: e.target.label })
     }
     const changeButtonColor = (e) => {
-        setCaseStyle({
-            ...caseStyle,
-            sideButton: e.target.value
-        })
-        setCaseDetail({
-            ...caseDetail,
-            sideButton: e.target.label
-        })
+        setCaseStyle({ ...caseStyle, sideButton: e.target.value })
+        setCaseDetail({ ...caseDetail, sideButton: e.target.label })
     }
     const withmagsafe = (e) => {
-        setCaseStyle({
-            ...caseStyle,
-            magsafe: e.target.value
-        })
+        setCaseStyle({ ...caseStyle, magsafe: e.target.value })
         const newMagsafe = e.target.label
         if (newMagsafe !== "否" && caseDetail.magsafe === "否") {
             setCaseDetail({
@@ -96,17 +78,11 @@ function Customized({ addToCart }) {
                 price: caseDetail.price - 50
             })//取消磁吸還金額修正
         } else {
-            setCaseDetail({
-                ...caseDetail,
-                magsafe: newMagsafe
-            })
+            setCaseDetail({ ...caseDetail, magsafe: newMagsafe })
         }
     }
     const withlanyard = (e) => {
-        setCaseStyle({
-            ...caseStyle,
-            lanyard: e.target.value
-        })
+        setCaseStyle({ ...caseStyle, lanyard: e.target.value })
         const newlanyard = e.target.label
         if (newlanyard !== "否" && caseDetail.lanyard === "否") {
             setCaseDetail({
@@ -121,10 +97,7 @@ function Customized({ addToCart }) {
                 price: caseDetail.price - 150
             })
         } else {
-            setCaseDetail({
-                ...caseDetail,
-                lanyard: newlanyard
-            })
+            setCaseDetail({ ...caseDetail, lanyard: newlanyard })
         }
     }
 
@@ -151,94 +124,67 @@ function Customized({ addToCart }) {
 
     return (
         <Container>
-            <Card className="showProduct" >
-                <Image className="phone" alt="" src={require(`../../assets/photo/${caseStyle.color}.png`)} />
-                <Image className="case" alt="" src={require('../../assets/photo/transparent.png')} />
-                <Image className="lensRing" alt="" src={require(`../../assets/photo/${caseStyle.lensRing}.png`)} />
-                <Image className="sideButton" alt="" src={require(`../../assets/photo/${caseStyle.sideButton}.png`)} />
-                <Image className="magsafe" alt="" src={require(`../../assets/photo/${caseStyle.magsafe}.png`)} />
-                <Image className="lanyard" alt="" src={require(`../../assets/photo/${caseStyle.lanyard}.png`)} />
-            </Card>
-
-            {/* <Form>
+            <Col>
+                <Card className="showProduct" >
+                    <Image className="phone" alt="" src={require(`../../assets/photo/${caseStyle.color}.png`)} />
+                    <Image className="case" alt="" src={require('../../assets/photo/transparent.png')} />
+                    <Image className="lensRing" alt="" src={require(`../../assets/photo/${caseStyle.lensRing}.png`)} />
+                    <Image className="sideButton" alt="" src={require(`../../assets/photo/${caseStyle.sideButton}.png`)} />
+                    <Image className="magsafe" alt="" src={require(`../../assets/photo/${caseStyle.magsafe}.png`)} />
+                    <Image className="lanyard" alt="" src={require(`../../assets/photo/${caseStyle.lanyard}.png`)} />
+                </Card>
+            </Col>
+            <Col>
+                <Card className="productSelect">
+                    <Form.Group controlId="custom-select">
+                    </Form.Group>
+                    <Card.Body>
                         <Form.Label className="optionTitle">手機顏色:</Form.Label>
-                        <Form.Control as="select" onChange={changePhoneColor}>
-                            <option className="d-none" value="">選擇鏡頭框顏色</option>
-                            {phoneColor.map((option, index) =>(
-                                <option key={index} value={option.value}>
+                        <Form.Control as="select" onChange={changePhoneColor} >
+                            <option className="d-none" value="">選擇手機顏色</option>
+                            {phoneColor.map((option) => (
+                                <option value={option.value}>
                                     {option.label}
                                 </option>
                             ))}
                         </Form.Control>
-                    </Form> */}
-
-            <Card className="productSelect">
-                <Form.Group controlId="custom-select">
-                </Form.Group>
-                <Card.Body>
-                    <Form.Label className="optionTitle">手機顏色:</Form.Label>
-                    <Form.Select onChange={changePhoneColor}>
-                        <option className="d-none" value="">選擇手機顏色</option>
-                        {phoneColor.map((option) => (
-                            <option key={option.className}
-                            value={option.value} >
-                                {option.label} 
-                            </option> 
-                        ))}
-                    </Form.Select>
-                    <Form.Label className="optionTitle">鏡頭框顏色:</Form.Label>
-                    <Form.Select onChange={changeLensColor}>
-                        <option className="d-none" value="" >選擇鏡頭框顏色</option>
-                        {lensring.map((option) => (
-                            <option key={option.className}
-                            value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    <Form.Label className="optionTitle">側邊按鍵顏色:</Form.Label>
-                    <Form.Select onChange={changeButtonColor}>
-                        <option className="d-none" value="">選擇側邊按鍵顏色</option>
-                        {sideButton.map((option) => (
-                            <option key={option.className} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    <Form.Label className="optionTitle">是否加購磁吸環:</Form.Label>
-                    <Form.Select onChange={withmagsafe}>
-                        <option className="d-none" value="">請選擇</option>
-                        {magsafe.map((option) => (
-                            <option key={option.className} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </Form.Select>
-                    <Form.Label className="optionTitle">是否加購掛繩:</Form.Label>
-                    <Form.Select onChange={withlanyard}>
-                        <option className="d-none" value="">請選擇</option>
-                        {lanyard.map((option) => (
-                            <option key={option.className} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </Form.Select>
-                </Card.Body >
-                <Card.Body className="productSelect" style={{ width: '18rem' }}>
-                    <Card className="productDetail">
-                        <Card.Header as="h5">確認商品內容</Card.Header>
-                        <ListGroup>
-                            <ListGroup.Item> 適用品牌型號: Apple - iPhone 16 Pro </ListGroup.Item>
-                            <ListGroup.Item> 鏡頭框顏色:{caseDetail.lensRing} </ListGroup.Item>
-                            <ListGroup.Item> 側邊按鍵顏色:{caseDetail.sideButton} </ListGroup.Item>
-                            <ListGroup.Item> 是否加購磁吸環:{caseDetail.magsafe} </ListGroup.Item>
-                            <ListGroup.Item> 是否加購掛繩:{caseDetail.lanyard} </ListGroup.Item>
-                            <ListGroup.Item> 商品總價: {caseDetail.price} </ListGroup.Item>
-                        </ListGroup>
-                    </Card>
-                    <Button className="sendToCart" onClick={sendoder}>加入購物車</Button>
-                </Card.Body>
-            </Card>
+                        <Form.Label className="optionTitle">鏡頭框顏色:</Form.Label>
+                        <Form.Control as="select" onChange={changeLensColor}>
+                            <option className="d-none" value="" >選擇鏡頭框顏色</option>
+                            {lensring.map((option) => (<option value={option.value}>{option.label}</option>))}
+                        </Form.Control>
+                        <Form.Label className="optionTitle">側邊按鍵顏色:</Form.Label>
+                        <Form.Control as="select" onChange={changeButtonColor}>
+                            <option className="d-none" value="">選擇側邊按鍵顏色</option>
+                            {sideButton.map((option) => (<option value={option.value}>{option.label}</option> ))}
+                        </Form.Control>
+                        <Form.Label className="optionTitle">是否加購磁吸環:</Form.Label>
+                        <Form.Control as="select" onChange={withmagsafe}>
+                            <option className="d-none" value="">請選擇</option>
+                            {magsafe.map((option) => (<option value={option.value}>{option.label}</option>))}
+                        </Form.Control>
+                        <Form.Label className="optionTitle">是否加購掛繩:</Form.Label>
+                        <Form.Control as="select" onChange={withlanyard} >
+                            <option className="d-none" value="">請選擇</option>
+                            {lanyard.map((option) => (<option value={option.value}>{option.label}</option>))}
+                        </Form.Control>
+                    </Card.Body >
+                    <Card.Body className="productSelect" style={{ width: '18rem' }}>
+                        <Card className="productDetail">
+                            <Card.Header as="h5">確認商品內容</Card.Header>
+                            <ListGroup>
+                                <ListGroup.Item> 適用品牌型號: Apple - iPhone 16 Pro </ListGroup.Item>
+                                <ListGroup.Item> 鏡頭框顏色:{caseDetail.lensRing} </ListGroup.Item>
+                                <ListGroup.Item> 側邊按鍵顏色:{caseDetail.sideButton} </ListGroup.Item>
+                                <ListGroup.Item> 是否加購磁吸環:{caseDetail.magsafe} </ListGroup.Item>
+                                <ListGroup.Item> 是否加購掛繩:{caseDetail.lanyard} </ListGroup.Item>
+                                <ListGroup.Item> 商品總價: {caseDetail.price} </ListGroup.Item>
+                            </ListGroup>
+                        </Card>
+                        <Button className="sendToCart" onClick={sendoder}>加入購物車</Button>
+                    </Card.Body>
+                </Card>
+            </Col>
         </Container>
     )
 }

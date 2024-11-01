@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import logo from "../../assets/logo.png";
-import pensvg from "../../assets/svg/pen.svg"
+import badgesvg from "../../assets/svg/person-badge.svg"
 import cartsvg from "../../assets/svg/cart.svg"
 import circlesvg from "../../assets/svg/person-circle.svg"
-import basketsvg from "../../assets/svg/basket.svg"
+import phonesvg from "../../assets/svg/phone.svg"
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 // import { BrowserRouter as Router } from "react-router-dom";
@@ -103,25 +103,21 @@ function App() {
 
 
               <Navbar.Collapse className="justify-content-end" data-bs-theme="#A1887F">
-
+                {/* 客製化選項 */}
                 <Nav.Item xs={1}>
-                  <Nav.Link href="/customized"><img src={pensvg} className="svg" alt="pen" />  </Nav.Link>
+                  <Nav.Link href="/customized">客製化<img src={badgesvg} className="svg" alt="pen" />  </Nav.Link>
                 </Nav.Item>
-
-
-                <Nav.Item xs={1}>
-                  <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" />  </Nav.Link>
+                {/* 商品列表選項 */}
+                <Nav.Item>
+                  <Nav.Link href="/List"><img className="svg" src={phonesvg} alt="basket" /></Nav.Link>
                 </Nav.Item>
-
                 {/* 登入選項 */}
-
                 <Nav.Item xs={1}>
                   <Nav.Link href="/eLogin"><img src={circlesvg} className="svg" alt="person" />  </Nav.Link>
                   {LoginName === null && (
-                    <Nav.Link to="/eLogin">
-                      <div className="hlogin"></div>
-                    </Nav.Link>
+                    <Nav.Link to="/eLogin"><div className="hlogin"></div></Nav.Link>
                   )}
+
                   {LoginName === "網站管理員" && (
                     <>
                       <Link to="/system">
@@ -161,12 +157,9 @@ function App() {
 
                 </Nav.Item>
 
-                {/* 商品列表選項 */}
-
-                <Nav.Item>
-                  <Nav.Link href="/List"><img className="svg" src={basketsvg} alt="basket" /></Nav.Link>
+                <Nav.Item xs={1}>
+                  <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" />  </Nav.Link>
                 </Nav.Item>
-
               </Navbar.Collapse>
             </Container>
           </Navbar>
@@ -174,7 +167,7 @@ function App() {
 
         <section className="content">
           <Routes>
-            <Route exact path="/" element={<HomePage addToCart={addToCart} productList={productList}/>} />
+            <Route exact path="/" element={<HomePage addToCart={addToCart} productList={productList} />} />
             <Route path="/eLogin" element={<ELogin />} />
             <Route path="/pLogin" element={<PLogin />} />
             <Route path="/signUp" element={<SignUp />} />
@@ -206,9 +199,9 @@ function App() {
                 <Nav.Link href="/"><img src={logo} className="titleLogo" alt="logo" /></Nav.Link>
               </Navbar.Brand>
               <Nav.Item>
-                  Designed : caseDesign
-                </Nav.Item>
-              <Navbar.Toggle/>
+                Designed : caseDesign
+              </Nav.Item>
+              <Navbar.Toggle />
               <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                   Signed in as: <a href="#login">Danny, Ajax, Chester</a>
