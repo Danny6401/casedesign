@@ -11,7 +11,12 @@ function AdminPage() {
   console.log("AdminPage");
   return (
     <div className="app">
+function AdminPage() {
+  console.log("AdminPage");
+  return (
+    <div className="app">
       <header className="header">
+        <div className="boxRight">
         <div className="boxRight">
           <Link to="/">
             <img src={logo} className="titleLogo" alt="Logo" />
@@ -30,6 +35,7 @@ function AdminPage() {
           <Route path="UploadItem" element={<UploadItem />} />
         </Routes>
       </section>
+      </section>
       <footer className="footer">
         <div>caseDesign</div>
       </footer>
@@ -40,9 +46,18 @@ function AdminPage() {
   // if (result && result.data){
   //     result.data.map(el=>{
   //         const {} = el;
+  );
+  // const url = "http://localhost:5000/system";
+  // const result = axios(url);
+  // if (result && result.data){
+  //     result.data.map(el=>{
+  //         const {} = el;
 
+  //     })
+  // }
   //     })
   // }
 }
 
 export default AdminPage;
+

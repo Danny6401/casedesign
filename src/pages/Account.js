@@ -140,19 +140,18 @@ function Account() {
                   <p>商品名稱: {item.name}</p>
                   <p>價格: {item.price}</p>
                   <p>數量: {item.quantity}</p>
-                  {item.detail !== undefined &&(
-                  <p>
-                    品項:{" "}
-                    {JSON.stringify(item.detail)
-                      .replace("lensRing", "鏡頭框")
-                      .replaceAll("sideButton", "側邊按鈕")
-                      .replaceAll("magsafe", "磁吸環")
-                      .replaceAll("lanyard", "掛繩")
-                      .replaceAll("price", "總價")
-                      .slice(1, -1)}
-                  </p>
-                  )
-                }
+                  {item.detail !== undefined && (
+                    <p>
+                      品項:{" "}
+                      {JSON.stringify(item.detail)
+                        .replace("lensRing", "鏡頭框")
+                        .replaceAll("sideButton", "側邊按鈕")
+                        .replaceAll("magsafe", "磁吸環")
+                        .replaceAll("lanyard", "掛繩")
+                        .replaceAll("price", "總價")
+                        .slice(1, -1)}
+                    </p>
+                  )}
                 </div>
               ))}
           </div>

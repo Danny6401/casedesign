@@ -72,25 +72,24 @@ function ShoppingCart({ cartItems, setCartItems }) {
         <ul>
           {cartItems.map((item) => (
             <li key={item._id} className="cartItem">
-                {typeof(item._id)=="number"?(
-                  <div className="itemImage">
-                    <img src={item.filename} alt="custdemo"/>
-                    <div className="itemDetail">
-                      <p>產品介紹:{item.description
-                      }</p>
-                    </div>
+              {typeof item._id == "number" ? (
+                <div className="itemImage">
+                  <img src={item.filename} alt="custdemo" />
+                  <div className="itemDetail">
+                    <p>產品介紹:{item.description}</p>
                   </div>
-                ):(
-                  <div className="itemImage">
-                    <img src={demo} alt="custdemo"/>
-                    <div className="itemDetail">
-                      <p>鏡頭框顏色:{item.detail.lensRing}</p>
-                      <p>側邊按鍵顏色:{item.detail.sideButton}</p>
-                      <p>加購磁吸環:{item.detail.magsafe}</p>
-                      <p>加購掛繩:{item.detail.lanyard}</p>
-                    </div>
+                </div>
+              ) : (
+                <div className="itemImage">
+                  <img src={demo} alt="custdemo" />
+                  <div className="itemDetail">
+                    <p>鏡頭框顏色:{item.detail.lensRing}</p>
+                    <p>側邊按鍵顏色:{item.detail.sideButton}</p>
+                    <p>加購磁吸環:{item.detail.magsafe}</p>
+                    <p>加購掛繩:{item.detail.lanyard}</p>
                   </div>
-                )}
+                </div>
+              )}
               <div className="itemName">
                 <h3>{item.name}</h3>
                 <p>單價: NT${item.price}</p>

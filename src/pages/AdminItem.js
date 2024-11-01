@@ -32,9 +32,8 @@ class AdminItem extends React.Component {
              <div class="name">
               <p>商品名稱: ${name}</p>
               <p>商品描述: ${description}</p>
-              <p>商品顏色: ${color}</p>
               <div class="image">
-                <img src="/photo/${filename}"/>
+                <img src="/photo/case/${filename}"/>
               </div>
               <p>定價: ${price}</p>
               <p>銷售中: ${sell}</p>

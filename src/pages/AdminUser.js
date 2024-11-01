@@ -2,6 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import Defines from "../utils/Defines";
+import { useState } from "react";
+import Defines from "../utils/Defines";
 /**
     username: "網站管理員",
     email: "root@caseDesign.com",
@@ -38,7 +40,7 @@ class AdminUser extends React.Component {
       console.log("get admin user:", result);
       console.log("typeof result.data: ", typeof result.data);
       if (result && result.data) {
-        this.setState({data: result.data});
+        this.setState({ data: result.data });
       } else {
         console.log("result null?");
       }
@@ -47,6 +49,7 @@ class AdminUser extends React.Component {
     }
   }
   render() {
+    console.log("Rendering");
     console.log("Rendering");
     const { data } = this.state;
     if (data.length === 0) {
@@ -88,6 +91,7 @@ class AdminUser extends React.Component {
 }
 
 const App = (props) => {
+  console.log("Adminusers");
   console.log("Adminusers");
   return (
     <div className="Items">

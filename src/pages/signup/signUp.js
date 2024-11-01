@@ -35,47 +35,48 @@ function SignUp() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(signupData),
-    }).then(response => response.json()).then((data)=>{
-      alert(data.message);
-      if (data.result === true)
-          navigate("/");
-      else
-          navigate("/signup");
-      console.log("message: ", data.message);
-      console.log("result: ", data.result);
-    }).catch(err => console.log("Error: ", err));
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        if (data.result === true) navigate("/");
+        else navigate("/signup");
+        console.log("message: ", data.message);
+        console.log("result: ", data.result);
+      })
+      .catch((err) => console.log("Error: ", err));
     /*    }).then(result=>{
             console.log("Result: ", result);
             console.log(result.body.message);
         }).catch(err=>console.log("Error: ", err));*/
-  }
+  };
   const handleUsername = (e) => {
     setUsername(e.target.value);
-  }
+  };
 
   const handleNickname = (e) => {
     setNickName(e.target.value);
-  }
+  };
 
   const handlePhoneNumber = (e) => {
     setPhoneNumber(e.target.value);
-  }
+  };
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-  }
+  };
 
   const handleAddress = (e) => {
     setAddress(e.target.value);
-  }
+  };
 
   const handleBirthday = (e) => {
     setBirthday(e.target.value);
-  }
+  };
   return (
     <div className="signup">
       <img id="logo" alt=" " height={60} src={logo} />
@@ -169,6 +170,6 @@ function SignUp() {
       </form>
     </div>
   );
-};
+}
 
 export default SignUp;
