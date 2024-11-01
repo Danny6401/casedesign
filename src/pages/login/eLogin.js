@@ -1,23 +1,22 @@
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
   Link,
   // withRouter,
 } from "react-router-dom";
 import "./login.scss";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { dataContext } from "./App";
+import { contextLoginName } from "../app/App";
+import Defines from "../../utils/Defines";
 
 function ESignin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUserRole, setuserhasLogin } = useContext(dataContext);
-  // const context = useContext(dataContext);
-  // console.log("context: ", context);
+  const { setLoginName } = useContext(contextLoginName);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +27,9 @@ function ESignin() {
       password: password,
     };
 
-    fetch("http://localhost:5000/login", {
+    // fetch("http://localhost:5000/login", {
+    console.log("TURL:", process.env.REACT_APP_URL + "login");
+    fetch(process.env.REACT_APP_URL + "login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,18 +38,18 @@ function ESignin() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success && data.admin === "admin") {
-          setUserRole(data.admin);
-          setuserhasLogin(true);
-          // navigate("/system");
+        if (data.success && data.admin) {
+          setLoginName(data.username);
+          navigate("/system");
         }
         console.log("data:", data);
         if (data.success) {
           console.log("Login successful");
           alert(`登入成功 ${data.username} ，歡迎回來!`);
-          setuserhasLogin(true);
+          setLoginName(data.username);
           navigate("/");
         } else {
+          setLoginName(null);
           switch (data.status) {
             case -1: //password error
               alert("密碼錯誤!");
@@ -81,7 +82,7 @@ function ESignin() {
 
   return (
     <div className="login">
-      <img id="logo" alt="" height={80} src={logo} />
+      <img id="logo" height={80} src={logo} alt="logo" />
       <h4>Sign In</h4>
       <form onSubmit={handleSubmit}>
         <input

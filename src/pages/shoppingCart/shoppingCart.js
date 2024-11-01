@@ -1,7 +1,8 @@
 import React from "react";
-import demo from "../assets/photo/cartdemo.jpg";
+import demo from "../../assets/photo/cartdemo.jpg";
 import "./shoppingcart.scss";
 import { useNavigate } from "react-router-dom";
+import Defines from "../../utils/Defines";
 
 function ShoppingCart({ cartItems, setCartItems }) {
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ function ShoppingCart({ cartItems, setCartItems }) {
     // cartItems.map((item)=>{console.log("item:", item);})
     for (let item of cartItems) console.log("item: ", item);
     try {
-      let result = await fetch("http://localhost:5000/uploadorder", {
+      // let result = await fetch("http://localhost:5000/uploadorder", {
+      let result = await fetch(process.env.REACT_APP_URL + "uploadorder", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cartItems),
@@ -26,6 +28,7 @@ function ShoppingCart({ cartItems, setCartItems }) {
             message.responseMsg +
             ", 訂單成立!"
         );
+        setCartItems([]);
         navigate("/");
       } else if (message.status === 302) {
         alert(message.responseMsg);
@@ -41,7 +44,7 @@ function ShoppingCart({ cartItems, setCartItems }) {
   const updateQuantity = (productId, quantity) => {
     setCartItems(
       cartItems.map((item) =>
-        item.id === productId
+        item._id === productId
           ? { ...item, quantity: Math.max(1, quantity) }
           : item
       )
@@ -50,7 +53,7 @@ function ShoppingCart({ cartItems, setCartItems }) {
 
   //移除購物車項目
   const removeCart = (productId) => {
-    setCartItems(cartItems.filter((item) => item.id !== productId));
+    setCartItems(cartItems.filter((item) => item._id !== productId));
   };
   //計算總金額
   const totalPrice = () => {
@@ -68,33 +71,43 @@ function ShoppingCart({ cartItems, setCartItems }) {
       ) : (
         <ul>
           {cartItems.map((item) => (
-            <li key={item.id} className="cartItem">
-              <div className="itemImage">
-                <img src={demo} alt="custdemo" />
-                <div className="itemDetail">
-                  <p>鏡頭框顏色:{item.detail.lensRing}</p>
-                  <p>側邊按鍵顏色:{item.detail.sideButton}</p>
-                  <p>加購磁吸環:{item.detail.magsafe}</p>
-                  <p>加購掛繩:{item.detail.lanyard}</p>
-                </div>
-              </div>
+            <li key={item._id} className="cartItem">
+                {typeof(item._id)=="number"?(
+                  <div className="itemImage">
+                    <img src={item.filename} alt="custdemo"/>
+                    <div className="itemDetail">
+                      <p>產品介紹:{item.description
+                      }</p>
+                    </div>
+                  </div>
+                ):(
+                  <div className="itemImage">
+                    <img src={demo} alt="custdemo"/>
+                    <div className="itemDetail">
+                      <p>鏡頭框顏色:{item.detail.lensRing}</p>
+                      <p>側邊按鍵顏色:{item.detail.sideButton}</p>
+                      <p>加購磁吸環:{item.detail.magsafe}</p>
+                      <p>加購掛繩:{item.detail.lanyard}</p>
+                    </div>
+                  </div>
+                )}
               <div className="itemName">
                 <h3>{item.name}</h3>
                 <p>單價: NT${item.price}</p>
               </div>
               <div className="buttons">
-                <button className="remove" onClick={() => removeCart(item.id)}>
+                <button className="remove" onClick={() => removeCart(item._id)}>
                   移除
                 </button>
                 <div className="quantity">
                   <button
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    onClick={() => updateQuantity(item._id, item.quantity - 1)}
                   >
                     -{" "}
                   </button>
                   <p className="quant"> {item.quantity} </p>
                   <button
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    onClick={() => updateQuantity(item._id, item.quantity + 1)}
                   >
                     +
                   </button>

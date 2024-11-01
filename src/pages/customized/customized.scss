@@ -79,6 +79,23 @@
         height: 50px;
         background: #c1272d;
         color: #ffffffe3;
+        cursor: pointer;
     }
 }
 
+@media screen and (max-width: 900px){
+    .custom{
+        display: flex;
+        flex-direction: column;
+        .showProduct{
+            position: relative;
+            img{
+                margin-top: 30px;
+                width: 200px;
+            };
+        }
+        .productSelect{
+            position: relative;
+        }
+    }
+}

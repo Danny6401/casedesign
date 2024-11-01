@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import Defines from "../utils/Defines";
 /**
     username: "網站管理員",
     email: "root@caseDesign.com",
@@ -14,47 +16,79 @@ class AdminUser extends React.Component {
   state = {
     data: [],
   };
+  async deleteUserHandler(email) {
+    console.log("deleteUserHandler");
+    //const url = "http://localhost:5000/system/AdminUser";
+    const url = process.env.REACT_APP_URL + "system/AdminUser";
+    const data = { email: email, action: "delete" };
+    try {
+      let result = await axios.post(url, data);
+      alert(result.data.message);
+      this.componentDidMount();
+    } catch (err) {
+      console.log("delete user:", err);
+    }
+  }
   async componentDidMount() {
-    const url = "http://localhost:5000/system/AdminUser";
-    console.log("componentDidMount");
-    const result = await axios(url);
-    let dispString = "";
-    // console.log("result: ", result, " result.data: ", result.data);
-    if (result && result.data) {
-      result.data.map((item) => {
-        const { username, email, phonenumber, address, order, admin } = item;
-        let administrator = null;
-        admin === true ? (administrator = "是") : (administrator = "否");
-        //下面的頂單編號應該要有link to...查詢資料庫的功能(也就是查詢的頁面)，search?動態路由，請看node(3)
-        dispString += `
-            <div class="card">
-             <div class="name">
-              <p>使用者名稱: ${username}</p>
-              <p>EMAIL: ${email}</p>
-              <p>行動電話: ${phonenumber}</p>
-              <p>送貨地址: ${address}</p>
-              <p>訂單號碼: ${order}</p> 
-              <p>管理者: ${administrator}</p>
-              <label for "deleteuser">刪除使用者</label>
-              <input type="checkbox" id="deleteuser" name="deleteuser"/>
-              <p>================================================================</p>
-              <br/>
-            </div>
-            </div>`;
-      });
-      //ToDo::要加入刪除使用者的功能
-      console.log(dispString);
-      this.setState({ data: dispString });
+    // const url = "http://localhost:5000/system/AdminUser";
+    const url = process.env.REACT_APP_URL + "system/AdminUser";
+    try {
+      console.log("AdminUser componentDidMount");
+      const result = await axios.get(url);
+      console.log("get admin user:", result);
+      console.log("typeof result.data: ", typeof result.data);
+      if (result && result.data) {
+        this.setState({data: result.data});
+      } else {
+        console.log("result null?");
+      }
+    } catch (error) {
+      console.log("Error:", error);
     }
   }
   render() {
+    console.log("Rendering");
     const { data } = this.state;
-    return <div dangerouslySetInnerHTML={{ __html: data }}></div>;
+    if (data.length === 0) {
+      return <div>載入中...</div>;
+    }
+    console.log("typeof data: ", typeof data, " and data: ", data);
+    return (
+      <div>
+        {data.map((item, index) => {
+          const { username, email, phonenumber, address, order, admin } = item;
+          return (
+            <div className="card" key={index}>
+              <div className="name">
+                <p>使用者名稱: {username}</p>
+                <p>EMAIL: {email}</p>
+                <p>行動電話: {phonenumber}</p>
+                <p>送貨地址: {address}</p>
+                {order !== undefined && <p>訂單號碼: {order.join(", ")}</p>}
+                <p>管理者: {admin ? "是" : "否"}</p>
+                {admin !== true && (
+                  <button
+                    type="button"
+                    onClick={() => this.deleteUserHandler(email)}
+                  >
+                    刪除使用者
+                  </button>
+                )}
+                <p>
+                  ================================================================
+                </p>
+                <br />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
 
 const App = (props) => {
-  console.log("AdminItems");
+  console.log("Adminusers");
   return (
     <div className="Items">
       <AdminUser />

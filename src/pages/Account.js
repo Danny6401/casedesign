@@ -5,12 +5,13 @@
   Link,
   withRouter,
 } from "react-router-dom";*/
-import "./login.scss";
+import "./login/login.scss";
 import logo from "../assets/logo.png";
 import { useState, useContext, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import { contextLoginName } from "./App";
+import { contextLoginName } from "./app/App";
 import { Link } from "react-router-dom";
+import Defines from "../utils/Defines";
 // import { loginStatus } from './App';
 
 function Account() {
@@ -19,8 +20,9 @@ function Account() {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setselectedOrder] = useState(null);
   const { LoginName } = useContext(contextLoginName);
-  let LinkAddress = "http://localhost:5000/account/";
-  const url = "http://localhost:5000/account/" + LoginName;
+  let LinkAddress = process.env.REACT_APP_URL + "account/";
+  // const url = "http://localhost:5000/account/" + LoginName;
+  const url = LinkAddress + LoginName;
 
   useEffect(() => {
     fetch(url, {
@@ -54,7 +56,12 @@ function Account() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setselectedOrder(data); // 把訂單詳細資料存入 selectedOrder
+        console.log("fetched data: ", data);
+        const orderid = data[0];
+        console.log("orderid: ", orderid);
+        const items = data.slice(1);
+        // setselectedOrder(data); // 把訂單詳細資料存入 selectedOrder
+        setselectedOrder({ ...orderid, items });
       })
       .catch((error) => {
         console.error("Error fetching order details:", error);
@@ -98,7 +105,7 @@ function Account() {
             value={respData.address}
             onChange={handleAddress}
             placeholder="送貨地址"
-            className="text_input"
+            className="address_input"
             required
           />
           <br />
@@ -107,17 +114,17 @@ function Account() {
             <br />
           </label>
           <label>
-            訂單列表:
+            訂單列表(點擊編號查看詳細內容):
             <ul>
               {orders.map((order) => (
                 <li key={order.id}>
-                  <button
-                    type="button"
+                  <div
+                    // type="button"
                     onClick={() => fetchOrderDetails(order.url)}
                     className="link-button"
                   >
                     {order.id}
-                  </button>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -125,7 +132,7 @@ function Account() {
         </h5>
         {selectedOrder && (
           <div className="order-details">
-            <h5>訂單詳細資料</h5>
+            <h4>訂單詳細資料</h4>
             <p>訂單編號: {selectedOrder.orderid}</p>
             {selectedOrder.items &&
               selectedOrder.items.map((item, index) => (
@@ -133,7 +140,19 @@ function Account() {
                   <p>商品名稱: {item.name}</p>
                   <p>價格: {item.price}</p>
                   <p>數量: {item.quantity}</p>
-                  <p>詳細: {JSON.stringify(item.detail)}</p>
+                  {item.detail !== undefined &&(
+                  <p>
+                    品項:{" "}
+                    {JSON.stringify(item.detail)
+                      .replace("lensRing", "鏡頭框")
+                      .replaceAll("sideButton", "側邊按鈕")
+                      .replaceAll("magsafe", "磁吸環")
+                      .replaceAll("lanyard", "掛繩")
+                      .replaceAll("price", "總價")
+                      .slice(1, -1)}
+                  </p>
+                  )
+                }
                 </div>
               ))}
           </div>
