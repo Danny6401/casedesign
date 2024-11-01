@@ -100,7 +100,7 @@ function App() {
             </Link>
             <div className="boxRight">
               <Link to="/customized">
-                <div className="customized">客製化手機殼 </div>
+                <div className="customized">客製化手機殼&nbsp;&nbsp;</div>
                 <br />
               </Link>
               <Link to="/shoppingCart">

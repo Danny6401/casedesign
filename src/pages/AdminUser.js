@@ -1,19 +1,10 @@
 import axios from "axios";
 import React from "react";
+// import { useState } from "react";
+// import Defines from "../utils/Defines";
 import { useState } from "react";
 import Defines from "../utils/Defines";
-import { useState } from "react";
-import Defines from "../utils/Defines";
-/**
-    username: "網站管理員",
-    email: "root@caseDesign.com",
-    password: "123456",
-    mobile: "0912345678",
-    address: "台北市信義區市民大道六段288號5樓",
-    order: [],
-    admin: true,
 
- */
 class AdminUser extends React.Component {
   state = {
     data: [],
@@ -49,7 +40,7 @@ class AdminUser extends React.Component {
     }
   }
   render() {
-    console.log("Rendering");
+    // console.log("Rendering");
     console.log("Rendering");
     const { data } = this.state;
     if (data.length === 0) {
@@ -91,7 +82,6 @@ class AdminUser extends React.Component {
 }
 
 const App = (props) => {
-  console.log("Adminusers");
   console.log("Adminusers");
   return (
     <div className="Items">

@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
 import Defines from "../utils/Defines";
-import Defines from "../utils/Defines";
 /**
     username: "網站管理員",
     email: "root@caseDesign.com",
@@ -23,13 +22,11 @@ class AdminOrder extends React.Component {
     const result = await axios.get(url);
     let dispString = "";
     console.log("Order Result: ", result, " result.data: ", result.data);
-    console.log("Order Result: ", result, " result.data: ", result.data);
     if (result && result.data) {
-      if (result.data.length === 0){
+      if (result.data.length === 0) {
         console.log("result.data.length === 0");
         dispString = '<div class="order"><p>目前尚無訂單</p></div>';
-      }
-      else
+      } else
         result.data.map((order) => {
           /*const { _id, itemnames, status, amount } = order;
       if (result.data.length === 0){
@@ -95,7 +92,7 @@ class AdminOrder extends React.Component {
               <br/>
             </div>
             </div>`;*/
-          dispString += `
+          /*dispString += `
             <div class="order">
              <div class="name">
               <p>${order[0]}</p>
@@ -116,7 +113,7 @@ class AdminOrder extends React.Component {
         });
       //ToDo::要加入刪除訂單的功能
       console.log("dispString:", dispString);
-        });
+
       //ToDo::要加入刪除訂單的功能
       console.log("dispString:", dispString);
       this.setState({ data: dispString });
