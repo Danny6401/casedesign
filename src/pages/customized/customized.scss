@@ -1,40 +1,34 @@
 .showProduct{
     background-color: #cecbc4;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
     width: 65%;
+    height: 780px;
     float: left;
-    position: absolute;
-    top: 100px;
+    position: relative;
     .phone{
         position: absolute;
         z-index: 1;
-        left: 50%;
     }
     .case{
         position: absolute;
         z-index: 3;
-        left: 50%;
     }
     .lensRing{
         position: absolute;
         z-index: 4;
-        left: 50%;
     }
     .sideButton{
         position: absolute;
         z-index: 2;
-        left: 50%;
     }
     .magsafe{
         position: absolute;
         z-index: 5;
-        left: 50%;
     }
     .lanyard{
         position: absolute;
         z-index: 2;
-        left: 50%;
     }
 
 }
@@ -88,14 +82,16 @@
         display: flex;
         flex-direction: column;
         .showProduct{
-            position: relative;
+            width: 100%;
+            height: 600px;
             img{
                 margin-top: 30px;
                 width: 200px;
             };
         }
         .productSelect{
-            position: relative;
+            margin-top: auto;
+            width: 100%;
         }
     }
 }
