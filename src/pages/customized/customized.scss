@@ -3,30 +3,36 @@
     display: flex;
     justify-content: center;
     width: 65%;
-    height: 780px;
+    height: 830px;
     float: left;
     position: relative;
     .phone{
+        margin-top: 50px;
         position: absolute;
         z-index: 1;
     }
     .case{
+        margin-top: 50px;
         position: absolute;
         z-index: 3;
     }
     .lensRing{
+        margin-top: 50px;
         position: absolute;
         z-index: 4;
     }
     .sideButton{
+        margin-top: 50px;
         position: absolute;
         z-index: 2;
     }
     .magsafe{
+        margin-top: 50px;
         position: absolute;
         z-index: 5;
     }
     .lanyard{
+        margin-top: 50px;
         position: absolute;
         z-index: 2;
     }
@@ -34,8 +40,8 @@
 }
 .productSelect{
     position: relative;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin-top: 50px;
+    margin-bottom: 50px;
     width: 35%;
     float: right;
     display: flex;
