@@ -7,6 +7,7 @@ import circlesvg from "../../assets/svg/person-circle.svg"
 import phonesvg from "../../assets/svg/phone.svg"
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/dropdown';
 // import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import {
@@ -112,52 +113,49 @@ function App() {
                   <Nav.Link href="/List"><img className="svg" src={phonesvg} alt="basket" title="商品列表"/></Nav.Link>
                 </Nav.Item>
                 {/* 登入選項 */}
-                <Nav.Item xs={1}>
-                  <Nav.Link href="/eLogin"><img src={circlesvg} className="svg" alt="person" title="登入"/>  </Nav.Link>
-                  {LoginName === null && (
-                    <Nav.Link to="/eLogin"><div className="hlogin"></div>
-                    </Nav.Link>
-                  )}
 
-                  {LoginName === "網站管理員" && (
-                    <>
-                      <Link to="/system">
-                        <div className="System">
-                          系統管理
-                          <br />
-                        </div>
-                      </Link>
-                    </>
-                  )}
-                  {LoginName !== null && (
-                    <Link to="/account">
-                      {" "}
-                      <div className="account">帳戶管理</div>
-                      <br />
-                    </Link>
-                  )}
-                  {LoginName !== null && (
-                    <div
-                      onClick={() => {
-                        alert(LoginName + " 您已登出!");
-                        setLoginName(null);
-                        //const url = "http://localhost:5000/logout";
-                        const url = Defines.URL + "logout";
-                        const logout = async () => {
-                          await axios(url);
-                        };
-                        logout();
-                        navigate("/");
-                      }}
-                      className="hLogout"
-                    >
-                      Logout
-                      <br />
-                    </div>
-                  )}
-
-                </Nav.Item>
-
+                <Dropdown>
+                  <Dropdown.Toggle split variant="svg" ><img src={circlesvg} className="svg" alt="person" title="登入" /></Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/eLogin">登入</Dropdown.Item>
+                    {LoginName === null && (
+                      <Dropdown.Item to="/eLogin"><div className="hlogin"></div></Dropdown.Item>
+                    )}
+                    {LoginName === "網站管理員" && (
+                      <>
+                        <Dropdown.Item to="/system">
+                          <div className="System">
+                            系統管理
+                            <br />
+                          </div>
+                        </Dropdown.Item>
+                      </>
+                    )}
+                    {LoginName !== null && (
+                      <Dropdown.Item to="/account">
+                        {" "}
+                        <div className="account">帳戶管理</div>
+                        <br />
+                      </Dropdown.Item>
+                    )}
+                    {LoginName !== null && (
+                      <div
+                        onClick={() => {
+                          alert(LoginName + " 您已登出!");
+                          setLoginName(null);
+                          //const url = "http://localhost:5000/logout";
+                          const url = Defines.URL + "logout";
+                          const logout = async () => {
+                            await axios(url);
+                          };
+                          logout();
+                          navigate("/");
+                        }}
+                        className="hLogout"
+                      > 登出 </div>
+                    )}
+                  </Dropdown.Menu>
+                </Dropdown>
                 <Nav.Item xs={1}>
                   <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" title="購物車"/>  </Nav.Link>
                 </Nav.Item>
@@ -165,6 +163,7 @@ function App() {
             </Container>
           </Navbar>
         </header>
+        
 
         <section className="content">
           <Routes>
