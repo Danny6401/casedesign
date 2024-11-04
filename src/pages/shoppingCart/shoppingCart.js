@@ -74,7 +74,7 @@ function ShoppingCart({ cartItems, setCartItems }) {
             <li key={item._id} className="cartItem">
               {typeof item._id == "number" ? (
                 <div className="itemImage">
-                  <img src={item.filename} alt="custdemo" />
+                  <img src={`/photo/case/${item.filename}`} alt="custdemo" />
                   <div className="itemDetail">
                     <p>產品介紹:{item.description}</p>
                   </div>
