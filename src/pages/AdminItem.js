@@ -176,8 +176,8 @@ const App = (props) => {
   console.log("AdminItems");
   return (
     <div className="Items">
-      {/* <AdminItem /> */}
-      <AdminItemwithFunctionComponent />
+      <AdminItem />
+      {/* <AdminItemwithFunctionComponent /> */}
     </div>
   );
 };
