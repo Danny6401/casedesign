@@ -1,12 +1,10 @@
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
-// import "../pages/app/app.css";
-import "./app/App.css";
+import "../pages/app/App.css";
 import logo from "../assets/logo.png";
 import React from "react";
 import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
 import AdminOrder from "./AdminOrder";
-import UploadItem from "./UploadItem";
 
 function AdminPage() {
   console.log("AdminPage");
@@ -20,7 +18,6 @@ function AdminPage() {
           <Link to="AdminItem">商品管理</Link>
           <Link to="AdminUser">使用者管理</Link>
           <Link to="AdminOrder">訂單管理</Link>
-          <Link to="UploadItem">上傳商品</Link>
         </div>
       </header>
       <section className="content">
@@ -28,7 +25,6 @@ function AdminPage() {
           <Route path="AdminItem" element={<AdminItems />} />
           <Route path="AdminUser" element={<AdminUser />} />
           <Route path="AdminOrder" element={<AdminOrder />} />
-          <Route path="UploadItem" element={<UploadItem />} />
         </Routes>
       </section>
       <footer className="footer">
