@@ -105,17 +105,18 @@ function App() {
               <Navbar.Collapse className="justify-content-end" data-bs-theme="#A1887F">
                 {/* 客製化選項 */}
                 <Nav.Item xs={1}>
-                  <Nav.Link href="/customized">客製化<img src={badgesvg} className="svg" alt="pen" />  </Nav.Link>
+                  <Nav.Link href="/customized"><img src={badgesvg} className="svg" alt="pen" title="客製化"/>  </Nav.Link>
                 </Nav.Item>
                 {/* 商品列表選項 */}
                 <Nav.Item>
-                  <Nav.Link href="/List"><img className="svg" src={phonesvg} alt="basket" /></Nav.Link>
+                  <Nav.Link href="/List"><img className="svg" src={phonesvg} alt="basket" title="商品列表"/></Nav.Link>
                 </Nav.Item>
                 {/* 登入選項 */}
                 <Nav.Item xs={1}>
-                  <Nav.Link href="/eLogin"><img src={circlesvg} className="svg" alt="person" />  </Nav.Link>
+                  <Nav.Link href="/eLogin"><img src={circlesvg} className="svg" alt="person" title="登入"/>  </Nav.Link>
                   {LoginName === null && (
-                    <Nav.Link to="/eLogin"><div className="hlogin"></div></Nav.Link>
+                    <Nav.Link to="/eLogin"><div className="hlogin"></div>
+                    </Nav.Link>
                   )}
 
                   {LoginName === "網站管理員" && (
@@ -158,7 +159,7 @@ function App() {
                 </Nav.Item>
 
                 <Nav.Item xs={1}>
-                  <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" />  </Nav.Link>
+                  <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" title="購物車"/>  </Nav.Link>
                 </Nav.Item>
               </Navbar.Collapse>
             </Container>

@@ -103,7 +103,7 @@ function HomePage({addToCart, productList}) {
             <Row xs={1} md={2} className="g-4">
                 {Array.from({ length: 4 }).map((_, idx) => (
                     <Col key={idx}>
-                        <Card>
+                        {/* <Card>
                             <Card.Img variant="top" src={logo} />
                             <Card.Body>
                                 <Card.Title>Card title</Card.Title>
@@ -113,13 +113,13 @@ function HomePage({addToCart, productList}) {
                                     longer.
                                 </Card.Text>
                             </Card.Body>
-                        </Card>
+                        </Card> */}
                     </Col>
                 ))}
             </Row>
 
             {/* BLOG */}
-            <Row>
+            {/* <Row>
                 <CardGroup>
                     <Card>
                         <Card.Img variant="top" src={logo} />
@@ -162,7 +162,7 @@ function HomePage({addToCart, productList}) {
                         </Card.Footer>
                     </Card>
                 </CardGroup>
-            </Row>
+            </Row> */}
         </Container>
 
 
