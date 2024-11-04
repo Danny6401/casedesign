@@ -1,11 +1,59 @@
 import axios from "axios";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Defines from "../utils/Defines";
 import { redirect } from "react-router-dom";
+// import { useState } from "react";
 /*fun'ction adminItem() {
   console.log("adminItem");
   return <h1>label</h1>;
 }*/
+function AdminItemwithFunctionComponent() {
+  const [item, setItem] = useState("");
+
+  async function updateItem() {
+    const url = process.env.REACT_APP_URL + "system/AdminItem";
+    const result = await axios.get(url);
+    if (result && result.data) setItem(result.data);
+  }
+
+  async function deleteItem(index) {
+    console.log("deleteUserItem");
+    const url = process.env.REACT_APP_URL + "system/AdminItem";
+    const data = { _id: index, action: "delete" };
+    try {
+      let result = await axios.post(url, data);
+      alert(result.data.message);
+      // this.componentDidMount();
+      updateItem();
+      redirect("/system/AdminItem");
+    } catch (err) {
+      console.log("delete Item:", err);
+    }
+  }
+  // useEffect(() => {}, [item]);
+
+  return (
+    <div>
+      {item.map((item, index) => {
+        return (
+          <div key={item._id} className="card">
+            <p>商品名稱: {item.name}</p>
+            <p>商品描述: {item.description}</p>
+            <p>商品顏色: {item.color}</p>
+            <div className="image">
+              <img src={`/photo/case/${item.filename}`} alt={item.name} />
+            </div>
+            <p>定價: {item.price}</p>
+            <p>銷售中: {item.available === true ? "是" : "否"}</p>
+            <button type="button" onClick={() => deleteItem(item._id)}>
+              刪除商品
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 class AdminItem extends React.Component {
   state = {
     data: [],
@@ -128,7 +176,8 @@ const App = (props) => {
   console.log("AdminItems");
   return (
     <div className="Items">
-      <AdminItem />
+      {/* <AdminItem /> */}
+      <AdminItemwithFunctionComponent />
     </div>
   );
 };
