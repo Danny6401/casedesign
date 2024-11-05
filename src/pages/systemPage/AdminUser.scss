@@ -1,0 +1,15 @@
+.user{
+    margin: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    .name{
+        h6{
+            font-weight:bold;
+        }
+        p{
+            color: #777;
+            font-size: 0.7em;
+            font-weight:bold;
+        }
+    }
+}

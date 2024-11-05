@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./UploadItem.scss";
 
 function Form(props) {
   const [name, setName] = useState("");
@@ -87,6 +88,7 @@ function Form(props) {
       <br />
       <label htmlFor="picture">圖片檔案: </label>
       <input
+        className="file"
         type="file"
         name="picture"
         accept="image/*"

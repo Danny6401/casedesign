@@ -23,8 +23,8 @@ import SignUp from "../signup/signUp";
 import Customized from "../customized/customized";
 import ShoppingCart from "../shoppingCart/shoppingCart";
 import ItemList from "../merchandise/merchantDise";
-import Account from "../Account";
-import System from "../System";
+import Account from "../systemPage/Account";
+import System from "../systemPage/System";
 import Defines from "../../utils/Defines"
 import Nav from 'react-bootstrap/Nav';
 /*import AdminItems from "./AdminItem";
@@ -70,6 +70,20 @@ function App() {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
+
+  //將登入資料保存到localStorage
+  useEffect(() => {
+    const storedLoginName = localStorage.getItem("LoginName");
+    if (storedLoginName) {
+      setLoginName(storedLoginName);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (LoginName !== null) localStorage.setItem("LoginName", LoginName);
+    else localStorage.removeItem("LoginName");
+  }, [LoginName]);
+
   //添加至購物車
   const addToCart = (product) => {
     console.log("addToCard");
@@ -110,7 +124,7 @@ function App() {
                 </Nav.Item>
                 {/* 商品列表選項 */}
                 <Nav.Item>
-                  <Nav.Link href="/List"><img className="svg" src={phonesvg} alt="basket" title="商品列表"/></Nav.Link>
+                  <Nav.Link href="/merchantdise"><img className="svg" src={phonesvg} alt="basket" title="商品列表"/></Nav.Link>
                 </Nav.Item>
                 {/* 登入選項 */}
 
@@ -123,7 +137,7 @@ function App() {
                     )}
                     {LoginName === "網站管理員" && (
                       <>
-                        <Dropdown.Item to="/system">
+                        <Dropdown.Item href="/system">
                           <div className="System">
                             系統管理
                             <br />
@@ -132,7 +146,7 @@ function App() {
                       </>
                     )}
                     {LoginName !== null && (
-                      <Dropdown.Item to="/account">
+                      <Dropdown.Item href="/account">
                         {" "}
                         <div className="account">帳戶管理</div>
                         <br />

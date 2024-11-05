@@ -5,13 +5,13 @@
   Link,
   withRouter,
 } from "react-router-dom";*/
-import "./login/login.scss";
-import logo from "../assets/logo.png";
+import "./Account.scss";
+import logo from "../../assets/logo.png";
 import { useState, useContext, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import { contextLoginName } from "./app/App";
+import { contextLoginName } from "../app/App";
 import { Link } from "react-router-dom";
-import Defines from "../utils/Defines";
+import Defines from "../../utils/Defines";
 // import { loginStatus } from './App';
 
 function Account() {
@@ -81,22 +81,21 @@ function Account() {
       <img id="logo" height={80} src={logo} alt="logo" />
       <h4>使用者資訊</h4>
       <form onSubmit={handleAddress}>
-        <h5>
+        <div>
           <label>
             使用者名稱: {respData.username}
-            <br />
           </label>
+          <br/>
           <label>
             Email: {respData.email}
-            <br />
           </label>
+          <br/>
           <label>
             手機號碼: {respData.phonenumber}
-            <br />
           </label>
+          <br/>
           <label htmlFor="address">
             送貨地址: {respData.address}
-            <br />
           </label>
           <input
             type="text"
@@ -108,11 +107,11 @@ function Account() {
             className="address_input"
             required
           />
-          <br />
+          <br/>
           <label>
             暱稱: {respData.nickname}
-            <br />
           </label>
+          <br/>
           <label>
             訂單列表(點擊編號查看詳細內容):
             <ul>
@@ -129,7 +128,7 @@ function Account() {
               ))}
             </ul>
           </label>
-        </h5>
+        </div>
         {selectedOrder && (
           <div className="order-details">
             <h4>訂單詳細資料</h4>

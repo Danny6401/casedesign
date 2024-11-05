@@ -1,0 +1,19 @@
+.topBox{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    a{
+        margin: 30px;
+        color: #964907;
+        font-size: large;
+    }
+}
+@media screen and (max-width: 900px){
+    .topBox{
+        a{
+            margin: 10px;
+            font-size:small;
+        }
+    }
+}
