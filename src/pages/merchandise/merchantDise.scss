@@ -89,8 +89,10 @@
   z-index: 1000;
   .modal-content {
     position: relative;
+    display: contents;
     img {
       height: 100vh;
+      width: 100vh;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
     .modal-content .close {

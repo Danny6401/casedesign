@@ -22,9 +22,9 @@ import PLogin from "../login/pLogin";
 import SignUp from "../signup/signUp";
 import Customized from "../customized/customized";
 import ShoppingCart from "../shoppingCart/shoppingCart";
-import ItemList from "../merchandise/merchantDise";
+import ItemList from "../merchandise/merchandise";
 import Account from "../systemPage/Account";
-import System from "../systemPage/System";
+import Systems from "../systemPage/Systems";
 import Defines from "../../utils/Defines"
 import Nav from 'react-bootstrap/Nav';
 /*import AdminItems from "./AdminItem";
@@ -124,7 +124,7 @@ function App() {
                 </Nav.Item>
                 {/* 商品列表選項 */}
                 <Nav.Item>
-                  <Nav.Link href="/merchantdise"><img className="svg" src={phonesvg} alt="basket" title="商品列表"/></Nav.Link>
+                  <Nav.Link href="/merchandise"><img src={phonesvg} className="svg" alt="phone" title="商品列表"/></Nav.Link>
                 </Nav.Item>
                 {/* 登入選項 */}
 
@@ -137,7 +137,7 @@ function App() {
                     )}
                     {LoginName === "網站管理員" && (
                       <>
-                        <Dropdown.Item href="/system">
+                        <Dropdown.Item href="/systems">
                           <div className="System">
                             系統管理
                             <br />
@@ -148,7 +148,7 @@ function App() {
                     {LoginName !== null && (
                       <Dropdown.Item href="/account">
                         {" "}
-                        <div className="account">帳戶管理</div>
+                        <div className="accounts">帳戶管理</div>
                         <br />
                       </Dropdown.Item>
                     )}
@@ -198,9 +198,9 @@ function App() {
               path="/customized"
               element={<Customized addToCart={addToCart} />}
             />
-            <Route path="/merchantdise" element={<ItemList addToCart={addToCart} productList={productList} />} />
+            <Route path="/merchandise" element={<ItemList addToCart={addToCart} productList={productList} />} />
             <Route path="/account" element={<Account />} />
-            <Route path="/system/*" element={<System />} />
+            <Route path="/systems/*" element={<Systems />} />
             {/* 幹，上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}
           </Routes>
         </section>
