@@ -1,22 +1,24 @@
 .app{
-  display: flex;
   min-height: 100vh;
+  display: flex;
   flex-direction: column;
 }
-.header{
-  background: rgb(205, 196, 188);
-  width: 100%;
-  height: 15vh;
+
+.svg{
+  
+  fill: #e9964e;
 }
+
 .titleLogo {
-  height: 40px;
+  height: 50px;
   align-items:start;
 }
 .content{
-  height: 100%;
   width: 100%;
+  height: 100%;
+  justify-content: center;
   text-align: center;
-  margin-top: 0;
+  background-color: rgba(220, 219, 217, 0.582);
 }
 .box{
   width: 100%;
@@ -33,9 +35,17 @@
 
 .footer{
   text-align: center;
-  padding: 20px 0px;
+  padding: 5px 0px;
   color: #555;
   background: #7a7a7a8c;
   margin-top: auto;
   margin-bottom: 0px;
+}
+@media screen and (max-width: 900px){
+  .titleLogo {
+    height: 30px;
+  }
+  .footer{
+    font-size: xx-small;
+  }
 }

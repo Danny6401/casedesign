@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-import Defines from "../utils/Defines";
+import "./AdminOrders.scss";
+import Defines from "../../utils/Defines";
 /**
     username: "網站管理員",
     email: "root@caseDesign.com",
@@ -103,12 +104,10 @@ class AdminOrder extends React.Component {
             </div>`;*/
           dispString += `
             <div class="order">
-             <div class="name">
-              <p>${order[0]}</p>
+              <h6>${order[0]}</h6>
               <p>${order[1]}</p>
               <p>================================================================</p>
               <br/>
-            </div>
             </div>`;
         });
       //ToDo::要加入刪除訂單的功能
@@ -128,7 +127,7 @@ class AdminOrder extends React.Component {
 const App = (props) => {
   console.log("AdminOrder");
   return (
-    <div className="Items">
+    <div className="orders">
       <AdminOrder />
     </div>
   );

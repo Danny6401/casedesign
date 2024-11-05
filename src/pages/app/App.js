@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import logo from "../../assets/logo.png";
+import badgesvg from "../../assets/svg/person-badge.svg"
+import cartsvg from "../../assets/svg/cart.svg"
+import circlesvg from "../../assets/svg/person-circle.svg"
+import phonesvg from "../../assets/svg/phone.svg"
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/dropdown';
 // import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import {
@@ -16,9 +23,10 @@ import SignUp from "../signup/signUp";
 import Customized from "../customized/customized";
 import ShoppingCart from "../shoppingCart/shoppingCart";
 import ItemList from "../merchandise/merchantDise";
-import Account from "../Account";
-import System from "../System";
-import Defines from "../../utils/Defines";
+import Account from "../systemPage/Account";
+import System from "../systemPage/System";
+import Defines from "../../utils/Defines"
+import Nav from 'react-bootstrap/Nav';
 /*import AdminItems from "./AdminItem";
 import AdminUser from "./AdminUser";
 import AdminOrder from "./AdminOrder";/*/
@@ -58,7 +66,12 @@ function App() {
   }, []);
 
   // 每次購物車更新時保存到 localStorage
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
+
+  //將登入資料保存到localStorage
   useEffect(() => {
     const storedLoginName = localStorage.getItem("LoginName");
     if (storedLoginName) {
@@ -67,12 +80,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-  useEffect(() => {
     if (LoginName !== null) localStorage.setItem("LoginName", LoginName);
     else localStorage.removeItem("LoginName");
   }, [LoginName]);
+
   //添加至購物車
   const addToCart = (product) => {
     console.log("addToCard");
@@ -93,73 +104,84 @@ function App() {
   return (
     <contextLoginName.Provider value={LoginValue}>
       <div className="app">
-        <header className="header">
-          <div className="box">
-            <Link to="/">
-              <img src={logo} className="titleLogo" alt="logo" />
-            </Link>
-            <div className="boxRight">
-              <Link to="/customized">
-                <div className="customized">客製化手機殼&nbsp;&nbsp;</div>
-                <br />
-              </Link>
-              <Link to="/shoppingCart">
-                <div className="shoppingCart">購物車 </div>
-                <br />
-              </Link>
-              {LoginName === null && (
-                <Link to="/eLogin">
-                  <div className="hlogin">Login</div>
-                  <br />
-                </Link>
-              )}
-              {LoginName === "網站管理員" && (
-                <>
-                  <Link to="/system">
-                    <div className="System">
-                      系統管理
-                      <br />
-                    </div>
-                  </Link>
-                </>
-              )}
-              {LoginName !== null && (
-                <Link to="/account">
-                  {" "}
-                  <div className="account">帳戶管理</div>
-                  <br />
-                </Link>
-              )}
-              {LoginName !== null && (
-                <div
-                  onClick={() => {
-                    alert(LoginName + " 您已登出!");
-                    setLoginName(null);
-                    // const url = "http://localhost:5000/logout";
-                    const url = process.env.REACT_APP_URL + "logout";
-                    const logout = async () => {
-                      await axios(url);
-                    };
-                    logout();
-                    localStorage.removeItem("LoginName");
-                    navigate("/");
-                  }}
-                  className="hLogout"
-                >
-                  Logout
-                  <br />
-                </div>
-              )}
 
-              <Link to="/merchantdise">
-                <div className="List">商品列表</div>
-              </Link>
-            </div>
-          </div>
+        {/* HEADER */}
+        <header className="header" >
+          <Navbar className="bg-body-tertiary" activeKey="/">
+            <Container >
+              {/* LOGO */}
+              <Navbar.Brand>
+                <Nav.Link href="/"><img src={logo} className="titleLogo" alt="logo" /></Nav.Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+              {/* LOGO */}
+
+
+              <Navbar.Collapse className="justify-content-end" data-bs-theme="#A1887F">
+                {/* 客製化選項 */}
+                <Nav.Item xs={1}>
+                  <Nav.Link href="/customized"><img src={badgesvg} className="svg" alt="pen" title="客製化"/>  </Nav.Link>
+                </Nav.Item>
+                {/* 商品列表選項 */}
+                <Nav.Item>
+                  <Nav.Link href="/merchantdise"><img className="svg" src={phonesvg} alt="basket" title="商品列表"/></Nav.Link>
+                </Nav.Item>
+                {/* 登入選項 */}
+
+                <Dropdown>
+                  <Dropdown.Toggle split variant="svg" ><img src={circlesvg} className="svg" alt="person" title="登入" /></Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/eLogin">登入</Dropdown.Item>
+                    {LoginName === null && (
+                      <Dropdown.Item to="/eLogin"><div className="hlogin"></div></Dropdown.Item>
+                    )}
+                    {LoginName === "網站管理員" && (
+                      <>
+                        <Dropdown.Item href="/system">
+                          <div className="System">
+                            系統管理
+                            <br />
+                          </div>
+                        </Dropdown.Item>
+                      </>
+                    )}
+                    {LoginName !== null && (
+                      <Dropdown.Item href="/account">
+                        {" "}
+                        <div className="account">帳戶管理</div>
+                        <br />
+                      </Dropdown.Item>
+                    )}
+                    {LoginName !== null && (
+                      <div
+                        onClick={() => {
+                          alert(LoginName + " 您已登出!");
+                          setLoginName(null);
+                          //const url = "http://localhost:5000/logout";
+                          const url = Defines.URL + "logout";
+                          const logout = async () => {
+                            await axios(url);
+                          };
+                          logout();
+                          navigate("/");
+                        }}
+                        className="hLogout"
+                      > 登出 </div>
+                    )}
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Nav.Item xs={1}>
+                  <Nav.Link href="/shoppingCart"><img src={cartsvg} className="svg" alt="cart" title="購物車"/>  </Nav.Link>
+                </Nav.Item>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
         </header>
+        
+
         <section className="content">
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/" element={<HomePage addToCart={addToCart} productList={productList} />} />
             <Route path="/eLogin" element={<ELogin />} />
             <Route path="/pLogin" element={<PLogin />} />
             <Route path="/signUp" element={<SignUp />} />
@@ -176,24 +198,37 @@ function App() {
               path="/customized"
               element={<Customized addToCart={addToCart} />}
             />
-            <Route
-              path="/merchantdise"
-              element={
-                <ItemList addToCart={addToCart} productList={productList} />
-              }
-            />
+            <Route path="/merchantdise" element={<ItemList addToCart={addToCart} productList={productList} />} />
             <Route path="/account" element={<Account />} />
             <Route path="/system/*" element={<System />} />
             {/* 幹，上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}
           </Routes>
         </section>
+
+
         <footer className="footer">
-          <div>caseDesign</div>
+          <Navbar>
+            <Container>
+              <Navbar.Brand href="/">
+                <Nav.Link href="/"><img src={logo} className="titleLogo" alt="logo" /></Nav.Link>
+              </Navbar.Brand>
+              <Nav.Item>
+                Designed : caseDesign
+              </Nav.Item>
+              <Navbar.Toggle />
+              <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>
+                  Signed in as: <a href="#login">Danny, Ajax, Chester</a>
+                </Navbar.Text>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
         </footer>
       </div>
-    </contextLoginName.Provider>
+    </contextLoginName.Provider >
   );
 }
+
 
 export default App;
 //export default withRouter(App);

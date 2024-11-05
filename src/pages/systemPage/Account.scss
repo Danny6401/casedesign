@@ -1,0 +1,13 @@
+.account{
+    height: 52.5vw;
+    form{
+        display: flex;
+        flex-direction: column;  
+        align-items: center;   
+        font-size: medium;
+        font-weight: bold;
+        button{
+            width: 150px;
+        }
+    }
+}

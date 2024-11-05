@@ -61,16 +61,16 @@
     height: 100px;
     width: 100%;
     button{
-      background-color: #e2c8c8;
+      background-color: #c8debc;
       border: 0;
       padding: 2px 25px;
-      font-size: 30px;
+      font-size: 25px;
       margin: 5px;
-      border-radius: 45%;
+      border-radius: 40%;
       cursor: pointer;
     }
     button:hover {
-      background-color: #a07970;
+      background-color: #90c077;
       color: black;
     }
   }
@@ -89,9 +89,8 @@
   z-index: 1000;
   .modal-content {
     position: relative;
-    .modal-content img {
-      max-width: 80vw;
-      max-height: 80vh;
+    img {
+      height: 100vh;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
     .modal-content .close {

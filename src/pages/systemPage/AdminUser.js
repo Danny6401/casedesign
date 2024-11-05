@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
+import "./AdminUser.scss";
 // import { useState } from "react";
 // import Defines from "../utils/Defines";
-import { useState } from "react";
-import Defines from "../utils/Defines";
+// import { useState } from "react";
+import Defines from "../../utils/Defines";
 
 class AdminUser extends React.Component {
   state = {
@@ -52,9 +53,9 @@ class AdminUser extends React.Component {
         {data.map((item, index) => {
           const { username, email, phonenumber, address, order, admin } = item;
           return (
-            <div className="card" key={index}>
+            <div className="user" key={index}>
               <div className="name">
-                <p>使用者名稱: {username}</p>
+                <h6>使用者名稱: {username}</h6>
                 <p>EMAIL: {email}</p>
                 <p>行動電話: {phonenumber}</p>
                 <p>送貨地址: {address}</p>
@@ -84,7 +85,7 @@ class AdminUser extends React.Component {
 const App = (props) => {
   console.log("Adminusers");
   return (
-    <div className="Items">
+    <div className="Users">
       <AdminUser />
     </div>
   );

@@ -1,13 +1,15 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import Defines from "../utils/Defines";
+import "./AdminItem.scss";
+import React from "react";
+import Defines from "../../utils/Defines";
 import { redirect } from "react-router-dom";
 // import { useState } from "react";
 /*fun'ction adminItem() {
   console.log("adminItem");
   return <h1>label</h1>;
 }*/
-function AdminItemwithFunctionComponent() {
+
+/*function AdminItemwithFunctionComponent() {
   const [item, setItem] = useState("");
 
   async function updateItem() {
@@ -37,10 +39,12 @@ function AdminItemwithFunctionComponent() {
       {item.map((item, index) => {
         return (
           <div key={item._id} className="card">
-            <p>商品名稱: {item.name}</p>
-            <p>商品描述: {item.description}</p>
-            <p>商品顏色: {item.color}</p>
+            <div className="title">
+              <h5>商品名稱: {item.name}</h5>
+              <p>商品描述: {item.description}</p>
+            </div>
             <div className="image">
+              <p>商品顏色: {item.color}</p>
               <img src={`/photo/case/${item.filename}`} alt={item.name} />
             </div>
             <p>定價: {item.price}</p>
@@ -53,7 +57,7 @@ function AdminItemwithFunctionComponent() {
       })}
     </div>
   );
-}
+}*/
 class AdminItem extends React.Component {
   state = {
     data: [],
@@ -99,6 +103,7 @@ class AdminItem extends React.Component {
       console.log("Error:", e);
     }
   }
+
   async deleteItemHandler(id) {
     console.log("deleteUserHandler");
     //const url = "http://localhost:5000/system/AdminUser";
@@ -113,6 +118,7 @@ class AdminItem extends React.Component {
       console.log("delete Item:", err);
     }
   }
+  
   render() {
     const { data } = this.state;
     return (
@@ -121,14 +127,16 @@ class AdminItem extends React.Component {
           data.map((item) => {
             return (
               <div key={item._id} className="card">
-                <p>商品名稱: {item.name}</p>
+              <div className="title">
+                <h5>商品名稱: {item.name}</h5>
                 <p>商品描述: {item.description}</p>
                 <p>商品顏色: {item.color}</p>
-                <div className="image">
-                  <img src={`/photo/case/${item.filename}`} alt={item.name} />
-                </div>
-                <p>定價: {item.price}</p>
-                <p>銷售中: {item.available === true ? "是" : "否"}</p>
+              </div>
+              <div className="image">
+                <img src={`/photo/case/${item.filename}`} alt={item.name} />
+              </div>
+              <p>定價: {item.price}</p>
+              <p>銷售中: {item.available === true ? "是" : "否"}</p>
                 <button
                   type="button"
                   onClick={() => this.deleteItemHandler(item._id)}
