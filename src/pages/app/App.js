@@ -201,7 +201,7 @@ function App() {
             <Route path="/merchandise" element={<ItemList addToCart={addToCart} productList={productList} />} />
             <Route path="/account" element={<Account />} />
             <Route path="/systems/*" element={<Systems />} />
-            {/* 幹，上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}
+            {/* 上面的/system/*很重要，如果沒有後面的*，連到system的時候每個組件都不會工作 */}
           </Routes>
         </section>
 
